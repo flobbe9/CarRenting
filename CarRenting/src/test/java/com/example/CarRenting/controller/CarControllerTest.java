@@ -2,7 +2,10 @@ package com.example.CarRenting.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+
+import java.util.Arrays;
+
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
@@ -52,15 +55,16 @@ public class CarControllerTest {
             .thenReturn(car);
 
         mockMvc.perform(post("/car/addNew")
-                       .contentType(MediaType.APPLICATION_JSON)
-                       .content(objectToJson(car)))      
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectToJson(car)))      
                .andExpect(status().isOk())
+               .andDo(print())
                .andReturn();              
     }
 
 
     @Test
-    void testGetAllByBrandAndModel() throws Exception {
+    void testGetCar() throws Exception {
 
         when(carService.getCar(car.getBrand(), 
                                car.getModel(), 
@@ -69,21 +73,25 @@ public class CarControllerTest {
                                car.getSpecification()))
             .thenReturn(car);
         
-        mockMvc.perform(get("/getByBrandAndModel?brand=VW&model=Golf&color=RED&fuelType=BENZINE"))
+        mockMvc.perform(get("/car/getCar?brand=VW&model=Golf&color=RED&fuelType=BENZINE")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectToJson(specification)))
                .andExpect(status().isOk())
+               .andDo(print())
                .andReturn();
     }
 
 
     @Test
-    void testGetAllByBrandAndModel2() {
-
-    }
-
-
-    @Test
-    void testGetCar() {
-
+    void testGetAllByBrandAndModel() throws Exception {
+        
+        when(carService.getAllByBrandAndModel(car.getBrand(), car.getModel()))
+            .thenReturn(Arrays.asList(car));
+        
+        mockMvc.perform(get("/car/getAllByBrandAndModel?brand=VW&model=Golf"))
+               .andExpect(status().isOk())
+               .andDo(print())
+               .andReturn();
     }
 
 
