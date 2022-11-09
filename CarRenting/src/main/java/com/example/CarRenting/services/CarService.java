@@ -18,6 +18,9 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private SpecificationService specificationService;
+
 
     public Car addNew(Car car) {
         
@@ -30,9 +33,17 @@ public class CarService {
                       Color color,
                       FuelType fuelType,
                       Specification specification) {
+
+        long specificationId = specificationService.getSpecification(specification.getNumSeats(), 
+                                                                     specification.getNumDoors(), 
+                                                                     specification.getHp(),
+                                                                     specification.getSpeedMax(), 
+                                                                     specification.getWeightUnladen(),
+                                                                     specification.getWeightMax())
+                                                   .getId();
         
         return carRepository
-                .findByBrandAndModelAndColorAndFuelTypeAndSpecification(brand, model, color, fuelType, specification)
+                .findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, model, color, fuelType, specificationId)
                 .orElseThrow(() -> 
                     new IllegalStateException("Could not find a car with these attributes."));
     }
