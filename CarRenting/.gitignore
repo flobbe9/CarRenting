@@ -7,6 +7,7 @@ build/
 gradle/wrapper/**
 !**/src/main/**/build/
 !**/src/test/**/build/
+todo.txt
 
 ### STS ###
 .apt_generated
