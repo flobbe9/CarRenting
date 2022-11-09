@@ -49,7 +49,6 @@ public class Car {
     private FuelType fuelType;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     private Specification specification;
 
     @Column(nullable = false)

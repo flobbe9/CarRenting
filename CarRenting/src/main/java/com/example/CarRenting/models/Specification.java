@@ -52,7 +52,6 @@ public class Specification {
     private Double weightMax;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id")
     private Car car;
 
 
