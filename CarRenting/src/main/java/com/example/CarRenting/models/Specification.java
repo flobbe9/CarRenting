@@ -46,9 +46,11 @@ public class Specification {
     @Column(nullable = false)
     private Integer speedMax;
 
+    /** Weight of a car without any charge, fuel etc. */
     @Column(nullable = false)
     private Double weightUnladen;
 
+    /** Allowed total weight of an unladen car plus charge, fuel etc. */
     @Column(nullable = false)
     private Double weightMax;
 
@@ -65,6 +67,7 @@ public class Specification {
                          Integer speedMax, 
                          Double weightUnladen,
                          Double weightMax) {
+                            
         this.numSeats = numSeats;
         this.numDoors = numDoors;
         this.hp = hp;
