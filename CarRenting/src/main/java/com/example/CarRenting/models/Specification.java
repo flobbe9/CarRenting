@@ -1,12 +1,11 @@
 package com.example.CarRenting.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -48,14 +47,15 @@ public class Specification {
     private Integer speedMax;
 
     @Column(nullable = false)
-    private Double weightEmpty;
+    private Double weightUnladen;
 
     @Column(nullable = false)
     private Double weightMax;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
+    @OneToOne
+    @JoinColumn(name = "car_id")
     @JsonBackReference
+    @EqualsAndHashCode.Exclude
     private Car car;
 
 
@@ -63,13 +63,13 @@ public class Specification {
                          Integer numDoors, 
                          Integer hp, 
                          Integer speedMax, 
-                         Double weightEmpty,
+                         Double weightUnladen,
                          Double weightMax) {
         this.numSeats = numSeats;
         this.numDoors = numDoors;
         this.hp = hp;
         this.speedMax = speedMax;
-        this.weightEmpty = weightEmpty;
+        this.weightUnladen = weightUnladen;
         this.weightMax = weightMax;
     }
 }
