@@ -37,7 +37,7 @@ public class CarController {
                       @RequestParam("model") String model,
                       @RequestParam("color") Color color,
                       @RequestParam("fuelType") FuelType fuelType,
-                      @RequestParam("specification") Specification specification) {
+                      @RequestBody Specification specification) {
 
         return carService.getCar(brand, model, color, fuelType, specification);
     }
