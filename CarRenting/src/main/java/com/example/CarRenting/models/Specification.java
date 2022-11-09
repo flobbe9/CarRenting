@@ -45,7 +45,7 @@ public class Specification {
     private Integer hp;
 
     @Column(nullable = false)
-    private Double speedMax;
+    private Integer speedMax;
 
     @Column(nullable = false)
     private Double weightEmpty;
@@ -62,7 +62,7 @@ public class Specification {
     public Specification(Integer numSeats, 
                          Integer numDoors, 
                          Integer hp, 
-                         Double speedMax, 
+                         Integer speedMax, 
                          Double weightEmpty,
                          Double weightMax) {
         this.numSeats = numSeats;
