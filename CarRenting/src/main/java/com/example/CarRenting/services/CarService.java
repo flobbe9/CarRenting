@@ -39,6 +39,7 @@ public class CarService {
 
 
     public List<Car> getAllByBrandAndModel(String brand, String model) {
+        
         List<Car> cars = carRepository.findAllByBrandAndModel(brand, model);
 
         if (cars.size() == 0) 
@@ -49,6 +50,7 @@ public class CarService {
 
 
     public List<Car> getAllByIsAvailable(boolean isAvailable) {
+
         List<Car> cars = carRepository.findAllByIsAvailable(isAvailable);
 
         if (cars.size() == 0) 

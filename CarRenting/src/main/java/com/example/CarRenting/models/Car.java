@@ -1,5 +1,6 @@
 package com.example.CarRenting.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,10 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.example.CarRenting.enums.Color;
 import com.example.CarRenting.enums.FuelType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,7 +51,9 @@ public class Car {
     @Column(nullable = false)
     private FuelType fuelType;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "specifiaction_id")
+    @JsonManagedReference
     private Specification specification;
 
     @Column(nullable = false)
@@ -61,6 +66,7 @@ public class Car {
                Color color, 
                FuelType fuelType, 
                Specification specification) {
+
         this.brand = brand;
         this.model = model;
         this.color = color;
