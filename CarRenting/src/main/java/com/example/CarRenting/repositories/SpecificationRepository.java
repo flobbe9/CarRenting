@@ -1,5 +1,6 @@
 package com.example.CarRenting.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,10 +12,22 @@ import com.example.CarRenting.models.Specification;
 @Repository
 public interface SpecificationRepository extends JpaRepository<Specification, Long> {
     
-    Optional<Specification> findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(int numSeats,
-                                                                                                  int numDoors,
-                                                                                                  int hp, 
-                                                                                                  int speedMax,
+    Optional<Specification> findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(Integer numSeats,
+                                                                                                  Integer numDoors,
+                                                                                                  Integer hp, 
+                                                                                                  Integer speedMax,
                                                                                                   double weightUnladen,
                                                                                                   double weightMax);
+
+    List<Specification> findAllByNumSeats(Integer numSeats);
+
+    List<Specification> findAllByNumDoors(Integer numDoors);
+
+    List<Specification> findAllByHp(Integer hp);
+
+    List<Specification> findAllBySpeedMax(Integer speedMax);
+
+    List<Specification> findAllByWeightUnladen(Double weightUnladen);
+
+    List<Specification> findAllByWeightMax(Double weightMax);
 }
