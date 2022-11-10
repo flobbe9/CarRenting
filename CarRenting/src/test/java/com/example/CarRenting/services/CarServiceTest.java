@@ -2,6 +2,7 @@ package com.example.CarRenting.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ public class CarServiceTest {
                               FuelType.BENZINE, 
                               specification);
 
-
+                            
     @Test
     @Order(1)
     void testAddNew() {
@@ -71,5 +72,21 @@ public class CarServiceTest {
     void testGetAllByIsAvailable() {
 
         assertFalse(carService.getAllByIsAvailable(true).isEmpty());
+    }
+
+
+    @Test 
+    void testGetAllBySpecifiaction() {
+
+        specification.setId(1l);
+
+        assertFalse(carService.getAllBySpecifiaction(car.getSpecification()).isEmpty());
+    }
+
+
+    @Test 
+    void testExistsByBrand() {
+
+        assertTrue(carService.existsByBrand(car.getBrand()));
     }
 }
