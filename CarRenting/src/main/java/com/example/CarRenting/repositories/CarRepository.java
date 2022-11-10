@@ -22,8 +22,15 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     
     List<Car> findAllByBrandAndModel(String brand, String model);   
     
-    List<Car> findAllByIsAvailable(boolean isAvailable);
+    List<Car> findAllByIsAvailable(Boolean isAvailable);
 
-    Optional<Car> findBySpecificationIdAndBrand(Long id, String brand);
+    List<Car> findAllByFuelType(FuelType fuelType);
     
+    List<Car> findAllByColor(Color color);
+
+    List<Car> findAllBySpecificationId(Long specificationId);
+
+    Boolean existsByBrand(String brand);
+
+    Boolean existsByModel(String model);
 }

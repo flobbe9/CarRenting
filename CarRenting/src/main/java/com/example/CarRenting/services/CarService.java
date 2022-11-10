@@ -69,4 +69,50 @@ public class CarService {
 
         return cars;
     }
+
+
+    public List<Car> getAllByFuelType(FuelType fuelType) {
+
+        List<Car> cars = carRepository.findAllByFuelType(fuelType);
+
+        if (cars.size() == 0) 
+            throw new IllegalStateException("Could not find any car with fuelType " + fuelType.name() + ".");
+        
+
+        return cars;
+    }
+
+
+    public List<Car> getAllByColor(Color color) {
+
+        List<Car> cars = carRepository.findAllByColor(color);
+
+        if (cars.size() == 0) 
+            throw new IllegalStateException("Could not find any car with color " + color.name() + ".");
+
+        return cars;
+    }
+
+
+    public List<Car> getAllBySpecifiaction(Specification specification) {
+
+        List<Car> cars = carRepository.findAllBySpecificationId(specification.getId());
+
+        if (cars.size() == 0) 
+            throw new IllegalStateException("Could not find any car with these exact specifications.");
+
+        return cars;
+    }
+
+
+    public Boolean existsByBrand(String brand) {
+
+        return carRepository.existsByBrand(brand);
+    }
+
+
+    public Boolean existsByModel(String model) {
+        
+        return carRepository.existsByModel(model);
+    }
 }
