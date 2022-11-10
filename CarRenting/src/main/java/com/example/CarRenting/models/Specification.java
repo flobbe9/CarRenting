@@ -75,4 +75,16 @@ public class Specification {
         this.weightUnladen = weightUnladen;
         this.weightMax = weightMax;
     }
+
+
+    @Override
+    public String toString() {
+        return "Num seats: " + this.numSeats + "\n" + 
+               "Num doors: " + this.numDoors + "\n" +
+               "Hp: " + this.hp + "\n" +
+               "Speed max: " + this.speedMax + "\n" +
+               "Weight unladen: " + this.weightUnladen + "\n" +
+               "Weight max: " + this.weightMax + "\n" +
+               "Car: " + this.car;
+    }
 }
