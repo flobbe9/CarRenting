@@ -1,5 +1,6 @@
 package com.example.CarRenting.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,11 @@ public class CarService {
 
     public Car getCar(String brand,
                       String model,
-                      Color color,
-                      FuelType fuelType,
+                      String color,
+                      String fuelType,
                       Specification specification) {
 
+        // getting id of specification for jpa method
         long specificationId = specificationService.getSpecification(specification.getNumSeats(), 
                                                                      specification.getNumDoors(), 
                                                                      specification.getHp(),
@@ -50,11 +52,21 @@ public class CarService {
                                                                      specification.getWeightUnladen(),
                                                                      specification.getWeightMax())
                                                    .getId();
-        
-        return carRepository
-                .findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, model, color, fuelType, specificationId)
-                .orElseThrow(() -> 
-                    new IllegalStateException("Could not find a car with these attributes."));
+
+        // checking if color and fuelType are enum constants
+        isEnum(color, Color.values());
+        isEnum(fuelType, FuelType.values());
+
+        // may contain douplicates
+        List<Car> cars = carRepository.findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, 
+                                                                          model, 
+                                                                          Color.valueOf(color), 
+                                                                          FuelType.valueOf(fuelType), 
+                                                                          specificationId);
+        if (cars.isEmpty())
+            throw new IllegalStateException("Could not find a car with these attributes.");
+
+        return cars.get(0);
     }
 
 
@@ -80,7 +92,7 @@ public class CarService {
     }
 
 
-    public List<Car> getAllByIsAvailable(boolean isAvailable) {
+    public List<Car> getAllByIsAvailable(Boolean isAvailable) {
 
         List<Car> cars = carRepository.findAllByIsAvailable(isAvailable);
 
@@ -91,24 +103,31 @@ public class CarService {
     }
 
 
-    public List<Car> getAllByFuelType(FuelType fuelType) {
+    public List<Car> getAllByFuelType(String fuelType) {
 
-        List<Car> cars = carRepository.findAllByFuelType(fuelType);
+        // checking if input is an enum constant
+        isEnum(fuelType, FuelType.values());
+
+
+        List<Car> cars = carRepository.findAllByFuelType(FuelType.valueOf(fuelType));
 
         if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with fuelType " + fuelType.name() + ".");
+            throw new IllegalStateException("Could not find any car with fuelType " + fuelType + ".");
         
 
         return cars;
     }
 
 
-    public List<Car> getAllByColor(Color color) {
+    public List<Car> getAllByColor(String color) {
 
-        List<Car> cars = carRepository.findAllByColor(color);
+        // checking if 'color' is a an enum constant
+        isEnum(color, Color.values());
+
+        List<Car> cars = carRepository.findAllByColor(Color.valueOf(color));
 
         if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with color " + color.name() + ".");
+            throw new IllegalStateException("Could not find any car with color " + color + ".");
 
         return cars;
     }
@@ -156,6 +175,26 @@ public class CarService {
 
         // checking specification
         specificationService.isValid(car.getSpecification());
+
+        return true;
+    }
+
+
+    /**
+     * Checks if given enum contains 'str'.
+     * 
+     * @param <T> the enum.
+     * @param str the String that might be included in the enum.
+     * @param enumArray array with all enum constants.
+     * @return true if array contains the String.
+     */
+    private<T> boolean isEnum(String str, T[] enumArray) {
+
+        boolean isEnum = Arrays.stream(enumArray)
+                                 .anyMatch(enumConstant -> enumConstant.toString().equals(str.toUpperCase()));
+        
+        if (!isEnum) 
+            throw new IllegalStateException("String input is not an enum constant.");
 
         return true;
     }

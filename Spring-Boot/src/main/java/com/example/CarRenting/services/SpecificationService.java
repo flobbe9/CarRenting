@@ -35,15 +35,18 @@ public class SpecificationService {
                                           double weightUnladen,
                                           double weightMax) {
 
-        return specificationRepository
-                .findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(numSeats, 
-                                                                                       numDoors, 
-                                                                                       hp, 
-                                                                                       speedMax, 
-                                                                                       weightUnladen, 
-                                                                                       weightMax)
-                .orElseThrow(() -> 
-                    new IllegalStateException("Could not find a specification with these attributes."));
+        // may contain douplicates         
+        List<Specification> specifications = specificationRepository
+                                                .findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(numSeats, 
+                                                                                                                       numDoors, 
+                                                                                                                       hp, 
+                                                                                                                       speedMax, 
+                                                                                                                       weightUnladen, 
+                                                                                                                       weightMax);
+        if (specifications.isEmpty())
+            throw new IllegalStateException("Could not find a specification with these attributes.");
+        
+        return specifications.get(0);
     }
     
 
