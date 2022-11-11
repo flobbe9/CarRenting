@@ -53,6 +53,10 @@ public class CarService {
                                                                      specification.getWeightMax())
                                                    .getId();
 
+        // making fuelType and color upperCase for comparison
+        fuelType = fuelType.toUpperCase();
+        color = color.toUpperCase();
+
         // checking if color and fuelType are enum constants
         isEnum(color, Color.values());
         isEnum(fuelType, FuelType.values());
@@ -105,9 +109,11 @@ public class CarService {
 
     public List<Car> getAllByFuelType(String fuelType) {
 
+        // making fuelType upperCase for comparison
+        fuelType = fuelType.toUpperCase();
+
         // checking if input is an enum constant
         isEnum(fuelType, FuelType.values());
-
 
         List<Car> cars = carRepository.findAllByFuelType(FuelType.valueOf(fuelType));
 
@@ -120,6 +126,9 @@ public class CarService {
 
 
     public List<Car> getAllByColor(String color) {
+
+        // making fuelType upperCase for comparison
+        color = color.toUpperCase();
 
         // checking if 'color' is a an enum constant
         isEnum(color, Color.values());
@@ -198,7 +207,7 @@ public class CarService {
     private<T> boolean isEnum(String str, T[] enumArray) {
 
         boolean isEnum = Arrays.stream(enumArray)
-                                 .anyMatch(enumConstant -> enumConstant.toString().equals(str.toUpperCase()));
+                               .anyMatch(enumConstant -> enumConstant.toString().equals(str));
         
         if (!isEnum) 
             throw new IllegalStateException("String input is not an enum constant.");

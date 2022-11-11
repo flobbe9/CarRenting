@@ -73,7 +73,7 @@ public class CarControllerTest {
                                car.getSpecification()))
             .thenReturn(car);
         
-        mockMvc.perform(get("/car/getCar?brand=VW&model=Golf&color=RED&fuelType=BENZINE")
+        mockMvc.perform(get("/car/getCar?brand=VW&model=Golf&color=rED&fuelType=BENzINE")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectToJson(specification)))
                .andExpect(status().isOk())
