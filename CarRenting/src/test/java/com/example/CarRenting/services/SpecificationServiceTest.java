@@ -2,6 +2,9 @@ package com.example.CarRenting.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -49,25 +52,57 @@ public class SpecificationServiceTest {
         // adding car sothat a specification is in the db
         carService.addNew(car);
 
-        assertEquals(specification, specificationService.getSpecification(specification.getNumSeats(), 
-                                                                          specification.getNumDoors(),
-                                                                          specification.getHp(), 
-                                                                          specification.getSpeedMax(), 
-                                                                          specification.getWeightUnladen(),
-                                                                          specification.getWeightMax()));
+        Specification addedSpecification = specificationService.getSpecification(specification.getNumSeats(), 
+                                                                                 specification.getNumDoors(),
+                                                                                 specification.getHp(), 
+                                                                                 specification.getSpeedMax(), 
+                                                                                 specification.getWeightUnladen(),
+                                                                                 specification.getWeightMax());
+
+        assertEquals(specification, addedSpecification);
     }
 
 
     @Test
     void testGetAllByNumSeats() {
+
+        List<Specification> specifications = specificationService.getAllByNumSeats(specification.getNumSeats());
         
-        assertFalse(specificationService.getAllByNumSeats(specification.getNumSeats()).isEmpty());
+        assertFalse(specifications.isEmpty());
+    }
+
+
+    @Test 
+    void testGetAllByNumSeatsGreaterThanEqual() {
+
+        // spcification with correct number of seats
+        List<Specification> specifications = specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats());
+        // spcification with too much seats
+        List<Specification> specificationsEmpty = specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats() + 1);
+
+        assertFalse(specifications.isEmpty());
+        assertTrue(specificationsEmpty.isEmpty());
     }
 
 
     @Test
     void testGetAllByWeightMax() {
 
-        assertFalse(specificationService.getAllByWeightMax(specification.getWeightMax()).isEmpty());
+        List<Specification> specifications = specificationService.getAllByWeightMax(specification.getWeightMax());
+
+        assertFalse(specifications.isEmpty());
+    }
+
+
+    @Test
+    void testGetAllByWeightUnladenLessThanEqual() {
+
+        // specification with correct weight unladen
+        List<Specification> specifications = specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen());
+        // specification with not enough weight unladen
+        List<Specification> specificationsEmpty = specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen() - 1);
+        
+        assertFalse(specifications.isEmpty());
+        assertTrue(specificationsEmpty.isEmpty());
     }
 }
