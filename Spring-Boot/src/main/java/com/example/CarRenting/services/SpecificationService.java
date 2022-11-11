@@ -15,6 +15,18 @@ public class SpecificationService {
     @Autowired
     private SpecificationRepository specificationRepository;
 
+    /** 1 km/h in mph */
+    public static final double ONE_KMH_IN_MPH = 0.6213711922;
+
+    /** 1 mph in km/h */
+    public static final double ONE_MPH_IN_KMH = 1.609344;
+
+    /** 1 kg in pounds */
+    public static final double ONE_KG_IN_POUNDS = 2.20462262185;
+    
+    /** 1 pound in kg */
+    public static final double ONE_POUND_IN_KG = 0.45359237;
+
 
     public Specification getSpecification(int numSeats,
                                           int numDoors, 
@@ -122,5 +134,68 @@ public class SpecificationService {
             throw new IllegalStateException("Maximum weight has to be greater than weight unladen.");
         
         return true;
+    }
+
+
+    /**
+     * Converts km/h to mph.
+     * <p>
+     * 1 km/h = 0.6213711922 mph
+     * <p>
+     * 15 km/h = 15 * 0.6213711922 mph = 9.3205678836 mph
+     * 
+     * @param speed in km/h.
+     * @return speed in mph.
+     */
+    public double kmhToMph(double speed) {
+
+        return speed * ONE_KMH_IN_MPH;
+    }
+
+
+    /**
+     * Converts mph to km/h.
+     * <p>
+     * 1 mph = 1.609344 km/h
+     * <p>
+     * 15 mph = 15 * 1.609344 km/h = 24.14016 mph
+     * 
+     * @param speed in mph.
+     * @return speed in km/h.
+     */
+    public double mphToKmh(double speed) {
+
+        return speed * ONE_MPH_IN_KMH;
+    }
+
+
+    /**
+     * Converts kg to pounds.
+     * <p>
+     * 1 kg = 2.20462262185 lb
+     * <p>
+     * 15 kg = 15 * 2.20462262185 lb = 33.0693393278 kg
+     * 
+     * @param weight in kg.
+     * @return weight in pounds.
+     */
+    public double kgToPounds(double weight) {
+        
+        return weight * ONE_KG_IN_POUNDS;
+    }
+
+    /**
+     * Converts pounds to kg.
+     * <p>
+     * 1 pound = 0.45359237 kg
+     * <p>
+     * 15 pounds = 15 * 0.45359237 kg = 6.80388555 kg
+     * 
+     * @param weight in kg.
+     * @return weight in pounds.
+     */
+    public double poundsToKg(double weight) {
+        
+        return weight * ONE_POUND_IN_KG;
     }
 }
