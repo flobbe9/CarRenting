@@ -108,12 +108,19 @@ public class SpecificationService {
     }
 
 
-//////// helper methods:
-
-
-    private boolean isValid(Specification specification) {
+    /**
+     * Checks attributes of a Specification. 
+     * 
+     * @param specification to check.
+     * @return true if all checks were successful.
+     * @throws IllegalStateException if one attribute is invalid.
+     */
+    public boolean isValid(Specification specification) {
         
-        // TODO: implement
+        // weightMax has to be greater than weightUnladen
+        if (specification.getWeightMax() <= specification.getWeightUnladen()) 
+            throw new IllegalStateException("Maximum weight has to be greater than weight unladen.");
+        
         return true;
     }
 }
