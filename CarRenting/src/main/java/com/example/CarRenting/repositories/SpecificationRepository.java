@@ -21,13 +21,23 @@ public interface SpecificationRepository extends JpaRepository<Specification, Lo
 
     List<Specification> findAllByNumSeats(Integer numSeats);
 
+    List<Specification> findAllByNumSeatsGreaterThanEqual(Integer numSeats);
+
     List<Specification> findAllByNumDoors(Integer numDoors);
 
     List<Specification> findAllByHp(Integer hp);
 
+    List<Specification> findAllByHpGreaterThanEqual(Integer hp);
+
     List<Specification> findAllBySpeedMax(Integer speedMax);
+
+    List<Specification> findAllBySpeedMaxGreaterThanEqual(Integer speedMax);
 
     List<Specification> findAllByWeightUnladen(Double weightUnladen);
 
+    List<Specification> findAllByWeightUnladenLessThanEqual(Double weightUnladen);
+
     List<Specification> findAllByWeightMax(Double weightMax);
+
+    List<Specification> findAllByWeightMaxGreaterThanEqual(Double weightMax);
 }

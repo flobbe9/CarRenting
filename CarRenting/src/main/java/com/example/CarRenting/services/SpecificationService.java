@@ -47,6 +47,12 @@ public class SpecificationService {
         return specificationRepository.findAllByNumSeats(numSeats);
     }
 
+
+    public List<Specification> getAllByNumSeatsGreaterThanEqual(int numSeats) {
+        
+        return specificationRepository.findAllByNumSeatsGreaterThanEqual(numSeats);
+    }
+
     
     public List<Specification> getAllByNumDoors(int numDoors) {
 
@@ -60,9 +66,21 @@ public class SpecificationService {
     }
 
 
+    public List<Specification> getAllByHpGreaterThanEqual(int hp) {
+
+        return specificationRepository.findAllByHpGreaterThanEqual(hp);
+    }
+
+
     public List<Specification> getAllBySpeedMax(int speedMax) {
 
         return specificationRepository.findAllBySpeedMax(speedMax);
+    }
+
+
+    public List<Specification> getAllBySpeedMaxGreaterThanEqual(int speedMax) {
+
+        return specificationRepository.findAllBySpeedMaxGreaterThanEqual(speedMax);
     }
 
 
@@ -72,9 +90,21 @@ public class SpecificationService {
     }
 
 
+    public List<Specification> getAllByWeightUnladenLessThanEqual(double weightUnladen) {
+
+        return specificationRepository.findAllByWeightUnladenLessThanEqual(weightUnladen);
+    }
+
+
     public List<Specification> getAllByWeightMax(double weightMax) {
 
         return specificationRepository.findAllByWeightMax(weightMax);
+    }
+
+
+    public List<Specification> getAllByWeightMaxGreaterThanEqual(double weightMax) {
+
+        return specificationRepository.findAllByWeightMaxGreaterThanEqual(weightMax);
     }
 
 
