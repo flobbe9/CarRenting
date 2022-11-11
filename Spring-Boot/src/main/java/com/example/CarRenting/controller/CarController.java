@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.CarRenting.enums.Color;
-import com.example.CarRenting.enums.FuelType;
 import com.example.CarRenting.models.Car;
 import com.example.CarRenting.models.Specification;
 import com.example.CarRenting.services.CarService;
@@ -38,8 +36,8 @@ public class CarController {
     @GetMapping("/getCar")
     public Car getCar(@RequestParam("brand") String brand,
                       @RequestParam("model") String model,
-                      @RequestParam("color") Color color,
-                      @RequestParam("fuelType") FuelType fuelType,
+                      @RequestParam("color") String color,
+                      @RequestParam("fuelType") String fuelType,
                       @RequestBody Specification specification) {
 
         return carService.getCar(brand, model, color, fuelType, specification);
@@ -62,21 +60,21 @@ public class CarController {
     
     
     @GetMapping("/getAllByIsAvailable")
-    public List<Car> getAllByIsAvailable(@RequestParam("isAvailable") boolean isAvailable) {
+    public List<Car> getAllByIsAvailable(@RequestParam("isAvailable") Boolean isAvailable) {
         
         return carService.getAllByIsAvailable(isAvailable);
     }
 
 
     @GetMapping("/getAllByFuelType")
-    public List<Car> getAllByFuelType(@RequestParam("fuelType") FuelType fuelType) {
+    public List<Car> getAllByFuelType(@RequestParam("fuelType") String fuelType) {
 
         return carService.getAllByFuelType(fuelType);
     }
 
 
     @GetMapping("/getAllByColor")
-    public List<Car> getAllByColor(@RequestParam("color") Color color) {
+    public List<Car> getAllByColor(@RequestParam("color") String color) {
 
         return carService.getAllByColor(color);
     }

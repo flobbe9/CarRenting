@@ -68,8 +68,8 @@ public class CarControllerTest {
 
         when(carService.getCar(car.getBrand(), 
                                car.getModel(), 
-                               car.getColor(), 
-                               car.getFuelType(), 
+                               car.getColor().name(), 
+                               car.getFuelType().name(), 
                                car.getSpecification()))
             .thenReturn(car);
         
