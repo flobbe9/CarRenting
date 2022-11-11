@@ -106,9 +106,6 @@ public class CarServiceTest {
     @Order(7)
     void testDelete() {
 
-        // setting id of car so it can be deleted
-        car.setId(1l);
-
         carService.delete(car);
 
         assertThrows(IllegalStateException.class, () -> carService.getAll().isEmpty());
