@@ -43,6 +43,7 @@ public class SpecificationService {
                                                                                                                        speedMax, 
                                                                                                                        weightUnladen, 
                                                                                                                        weightMax);
+        
         if (specifications.isEmpty())
             throw new IllegalStateException("Could not find a specification with these attributes.");
         
