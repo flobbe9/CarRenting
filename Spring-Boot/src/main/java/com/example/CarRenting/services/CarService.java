@@ -23,13 +23,13 @@ public class CarService {
 
 
     /**
-     * Adds new car entity to the db. Checks incoming input before saving.
+     * Saves car entity to the db. Checks incoming input before saving.
      * 
      * @param car to add.
      * @return saved car.
      * @throws IllegalStateException if one car attribute is invalid.
      */
-    public Car addNew(Car car) {
+    public Car saveCar(Car car) {
 
         isValid(car);
         
@@ -55,6 +55,17 @@ public class CarService {
                 .findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, model, color, fuelType, specificationId)
                 .orElseThrow(() -> 
                     new IllegalStateException("Could not find a car with these attributes."));
+    }
+
+
+    public List<Car> getAll() {
+
+        List<Car> cars = carRepository.findAll();
+
+        if (cars.isEmpty()) 
+            throw new IllegalStateException("Could not find any car.");
+
+        return cars;
     }
 
 
@@ -126,6 +137,12 @@ public class CarService {
     }
 
 
+    public void delete(Car car) {
+
+        carRepository.delete(car);
+    }
+
+
 /////// helper methods:
 
     /**
@@ -139,10 +156,6 @@ public class CarService {
 
         // checking specification
         specificationService.isValid(car.getSpecification());
-
-        // should be available 
-        if (!car.getIsAvailable())
-            throw new IllegalStateException("Car has to be available when added to the db.");
 
         return true;
     }
