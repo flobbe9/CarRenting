@@ -32,6 +32,8 @@ public class CarService {
      */
     public Car saveCar(Car car) {
 
+        // TODO: catch enum exception
+
         isValid(car);
         
         return carRepository.save(car);
