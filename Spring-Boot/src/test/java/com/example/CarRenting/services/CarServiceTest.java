@@ -2,6 +2,7 @@ package com.example.CarRenting.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Order;
@@ -43,6 +44,15 @@ public class CarServiceTest {
     @Test
     @Order(1)
     void testAddNew() {
+
+        // setting up falsy car attributes and correcting them afterwards
+        specification.setWeightMax(1d);
+        assertThrows(IllegalStateException.class, () -> carService.addNew(car));
+        specification.setWeightMax(2300d);
+        
+        car.setIsAvailable(false);
+        assertThrows(IllegalStateException.class, () -> carService.addNew(car));
+        car.setIsAvailable(true);
 
         assertEquals(car, carService.addNew(car));
     }
