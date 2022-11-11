@@ -105,4 +105,36 @@ public class SpecificationServiceTest {
         assertFalse(specifications.isEmpty());
         assertTrue(specificationsEmpty.isEmpty());
     }
+
+
+    @Test
+    void testKmhToMph() {
+
+        // converting 100 km/h to mph
+        assertEquals(62.13711922, specificationService.kmhToMph(100));
+    }
+
+
+    @Test
+    void testMphToKmh() {
+
+        // converting 100 mph to km/h
+        assertEquals(160.9344, specificationService.mphToKmh(100));
+    }
+
+
+    @Test
+    void testKgToPounds() {
+
+        // converting 100 kg to pounds
+        assertEquals(220.46226218500001, specificationService.kgToPounds(100));
+    }
+
+
+    @Test
+    void testPountdsToKg() {
+
+        // converting 100 kg to pounds
+        assertEquals(45.359237, specificationService.poundsToKg(100));
+    }
 }
