@@ -158,6 +158,13 @@ public class CarService {
 
     public void delete(Car car) {
 
+        // getting a single car because the repo may find douplicates
+        car = getCar(car.getBrand(), 
+                     car.getModel(), 
+                     car.getColor().name(), 
+                     car.getFuelType().name(), 
+                     car.getSpecification());
+
         carRepository.delete(car);
     }
 
