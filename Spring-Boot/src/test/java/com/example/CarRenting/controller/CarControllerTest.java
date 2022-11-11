@@ -54,7 +54,7 @@ public class CarControllerTest {
         when(carService.saveCar(car))
             .thenReturn(car);
 
-        mockMvc.perform(post("/car/addNew")
+        mockMvc.perform(post("/car/saveCar")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectToJson(car)))      
                .andExpect(status().isOk())
@@ -92,6 +92,30 @@ public class CarControllerTest {
                .andExpect(status().isOk())
                .andDo(print())
                .andReturn();
+    }
+
+
+    @Test
+    void testExistsByModel() throws Exception {
+        
+        when(carService.existsByModel(car.getModel()))
+            .thenReturn(true);
+        
+        mockMvc.perform(get("/car/existsByModel?model=Golf"))
+               .andExpect(status().isOk())
+               .andDo(print())
+               .andReturn();
+    }
+
+
+    @Test 
+    void testDelete() throws Exception {
+
+        mockMvc.perform(delete("/car/delete")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectToJson(car)))
+               .andExpect(status().isOk())
+               .andDo(print());
     }
 
 
