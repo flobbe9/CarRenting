@@ -51,7 +51,7 @@ public class CarControllerTest {
     @Test
     void testAddNew() throws JsonProcessingException, Exception {
 
-        when(carService.addNew(car))
+        when(carService.saveCar(car))
             .thenReturn(car);
 
         mockMvc.perform(post("/car/addNew")

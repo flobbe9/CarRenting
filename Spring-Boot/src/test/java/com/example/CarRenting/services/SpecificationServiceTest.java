@@ -50,7 +50,7 @@ public class SpecificationServiceTest {
     void testGetSpecification() {
 
         // adding car sothat a specification is in the db
-        carService.addNew(car);
+        carService.saveCar(car);
 
         Specification addedSpecification = specificationService.getSpecification(specification.getNumSeats(), 
                                                                                  specification.getNumDoors(),
