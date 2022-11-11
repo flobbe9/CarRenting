@@ -43,22 +43,19 @@ public class CarServiceTest {
                             
     @Test
     @Order(1)
-    void testAddNew() {
+    void testSaveCar() {
 
         // setting up falsy car attributes and correcting them afterwards
         specification.setWeightMax(1d);
-        assertThrows(IllegalStateException.class, () -> carService.addNew(car));
+        assertThrows(IllegalStateException.class, () -> carService.saveCar(car));
         specification.setWeightMax(2300d);
-        
-        car.setIsAvailable(false);
-        assertThrows(IllegalStateException.class, () -> carService.addNew(car));
-        car.setIsAvailable(true);
 
-        assertEquals(car, carService.addNew(car));
+        assertEquals(car, carService.saveCar(car));
     }
 
 
     @Test
+    @Order(2)
     void testGetCar() {
 
         assertEquals(car, carService.getCar(car.getBrand(), 
@@ -70,6 +67,7 @@ public class CarServiceTest {
 
 
     @Test
+    @Order(3)
     void testGetAllByBrandAndModel() {
 
         assertFalse(carService.getAllByBrandAndModel(car.getBrand(),
@@ -79,13 +77,15 @@ public class CarServiceTest {
 
 
     @Test
+    @Order(4)
     void testGetAllByIsAvailable() {
 
         assertFalse(carService.getAllByIsAvailable(true).isEmpty());
     }
 
 
-    @Test 
+    @Test
+    @Order(5) 
     void testGetAllBySpecifiaction() {
 
         specification.setId(1l);
@@ -95,8 +95,22 @@ public class CarServiceTest {
 
 
     @Test 
+    @Order(6)
     void testExistsByBrand() {
 
         assertTrue(carService.existsByBrand(car.getBrand()));
+    }
+
+
+    @Test
+    @Order(7)
+    void testDelete() {
+
+        // setting id of car so it can be deleted
+        car.setId(1l);
+
+        carService.delete(car);
+
+        assertThrows(IllegalStateException.class, () -> carService.getAll().isEmpty());
     }
 }
