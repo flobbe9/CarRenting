@@ -22,7 +22,16 @@ public class CarService {
     private SpecificationService specificationService;
 
 
+    /**
+     * Adds new car entity to the db. Checks incoming input before saving.
+     * 
+     * @param car to add.
+     * @return saved car.
+     * @throws IllegalStateException if one car attribute is invalid.
+     */
     public Car addNew(Car car) {
+
+        isValid(car);
         
         return carRepository.save(car);
     }
@@ -114,5 +123,27 @@ public class CarService {
     public Boolean existsByModel(String model) {
         
         return carRepository.existsByModel(model);
+    }
+
+
+/////// helper methods:
+
+    /**
+     * Checks car attributes.
+     * 
+     * @param car to check.
+     * @return true if all checks were successful.
+     * @throws IllegalStateException if one attribute is not valid.
+     */
+    private boolean isValid(Car car) {
+
+        // checking specification
+        specificationService.isValid(car.getSpecification());
+
+        // should be available 
+        if (!car.getIsAvailable())
+            throw new IllegalStateException("Car has to be available when added to the db.");
+
+        return true;
     }
 }
