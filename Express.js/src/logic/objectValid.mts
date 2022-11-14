@@ -8,33 +8,27 @@
  * - 'obj' is NaN,                                                                      
  * - 'obj' is a string with length 0                                                                      
  * - 'obj' is an iterable and any of the above applies to one element in the iterable.
- * - 'obj' is an object and any of the above applies to one element in the object.
+ * - 'obj' is an object but has no keys or any of the above applies to one element in the object.
  */
  function objectValid(obj: any): boolean {
     
-    // checking for null and undefined (objects may have to be null...)
-    if (obj === null || obj === undefined) 
+    if (isNullOrUndefined(obj)) 
         return false;
     
-    // checking for NaN
-    if (typeof obj === "number" && isNaN(obj)) 
+    if (isNotANumber(obj)) 
         return false;
-
-    // checking for emtpy string
-    if (typeof obj === "string" && obj === "") 
+        
+    if (isEmptyString(obj))
         return false;
     
-    // iterating collection recursively, if iterable
-    if (typeof obj[Symbol.iterator] === "function" && typeof obj !== "string")
-        // returns false if only one element 'el' is not valid
-        return !obj.some(el: => !objectValid(el));
+    if (isIterable(obj))
+        return !obj.some(el => !objectValid(el));
 
-    // iterating object recursively
-    if (typeof obj === "object") {
-        return !Object.entries(obj).some((key, value) => {
-            // returns false if only one key or one value is not valid
-            return !objectValid(key) || !objectValid(value);
-        });
+    if (isObject(obj)) {
+        if (isObjectEmpty(obj)) 
+            return false;
+
+        return !Object.entries(obj).some((key, value) => !objectValid(key) || !objectValid(value));
     }
 
     return true;
@@ -67,3 +61,41 @@ function removeSpacesInFront(str: string): string {
 
 
 export { objectValid, removeSpacesInFront };
+
+
+///// helper methods
+
+
+function isNullOrUndefined(obj: any): boolean {
+
+    return obj === null || obj === undefined;
+}
+
+
+function isNotANumber(obj: any): boolean {
+
+    return typeof obj === "number" && isNaN(obj);
+}
+
+
+function isEmptyString(obj: any): boolean {
+
+    return typeof obj === "string" && obj === "";
+}
+
+
+function isIterable(obj: any): boolean {
+
+    return typeof obj[Symbol.iterator] === "function" && typeof obj !== "string";
+}
+
+
+function isObject(obj: any): boolean {
+
+    return typeof obj === "object";
+}
+
+function isObjectEmpty(obj: any): boolean {
+
+    return Object.keys(obj).length === 0;
+}

@@ -12,15 +12,10 @@ const port = 4001;
 app.use(express.json());
 
 
-// checking every requestbody or parameter with objectValid()
-app.use((req, res, next) => {
-    
-    // body
-    if (req.body && !objectValid(req.body)) 
-        throw "Invalid input.";
-    
-    // parameter
-    if (req.params && !objectValid(req.query)) 
+// assuming that every post request has a request body
+app.post("/**", (req, res, next) => {
+
+    if (!objectValid(req.body))
         throw "Invalid input.";
 
     next();

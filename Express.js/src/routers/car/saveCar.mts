@@ -14,16 +14,8 @@ import { carValid } from "../../logic/carValid.mjs";
  */
 async function saveCar(req, res, next) {
 
-    const body = req.body;
-
-    // if request body misses
-    if (!body) {
-        res.send("Bad request. Missing request body.");
-        return;
-    }
-
     // if car is invalid
-    if (!carValid(body)) {
+    if (!carValid(req.body)) {
         res.send("Invalid car attribute.");
         return;
     }
@@ -34,12 +26,11 @@ async function saveCar(req, res, next) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: body
+        body: req.body
     }
 
     // redirecting request to spring API
-    const response = await makeRequest(springDomain + "/car/saveCar", fetchHeaders);
-    res.send(response);
+    res.send(await makeRequest(springDomain + "/car/saveCar", fetchHeaders));
 };
 
 
