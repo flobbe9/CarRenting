@@ -1,6 +1,6 @@
 import express from "express";
 import { objectValid } from "./logic/objectValid.mjs";
-import { carRouter } from "./routers/car/car.mjs";
+import { carRouter } from "./routers/car/router.mjs";
 
 export const springDomain = "http://localhost:4002";
 
