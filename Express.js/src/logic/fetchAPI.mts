@@ -23,8 +23,7 @@ async function makeRequest(url: string, fetchHeaders: FetchHeader) {
 
         // request not successful
         const responseMessage = await response.text();
-
-        return `An error occurred!\nStatus: ${response.status}\nMessage: ${responseMessage}`;
+        throw `An error occurred!\nStatus: ${response.status}\nMessage: ${responseMessage}`;
 
     } catch (e) {
         console.log(e);
