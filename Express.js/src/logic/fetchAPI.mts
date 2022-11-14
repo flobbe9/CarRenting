@@ -19,15 +19,16 @@ async function makeRequest(url: string, fetchHeaders: FetchHeader) {
         const response = await fetch(url, fetchHeaders);
 
         // request successful
-        if (response.ok) return await response.json();
+        if (response.ok) 
+            return await response.json();
 
         // request not successful
-        const responseMessage = await response.text();
-        throw `An error occurred!\nStatus: ${response.status}\nMessage: ${responseMessage}`;
+        console.log(`An error occurred!\nStatus: ${response.status}\nMessage: ${await response.text()}`);
+        return response.status;
 
     } catch (e) {
         console.log(e);
-        return e;
+        return 500;
     }
 } 
 
