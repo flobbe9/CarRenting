@@ -49,6 +49,13 @@ public class CarController {
 
         return carService.getAll();
     }
+
+
+    @GetMapping("/getById")
+    public Car getById(@RequestParam("id") Long id) {
+
+        return carService.getById(id);
+    }
     
     
     @GetMapping("/getAllByBrandAndModel")

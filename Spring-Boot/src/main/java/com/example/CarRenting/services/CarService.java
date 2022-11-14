@@ -76,6 +76,13 @@ public class CarService {
     }
 
 
+    public Car getById(Long id) {
+
+        return carRepository.findById(id).orElseThrow(() -> 
+            new IllegalStateException("Could not find car with id " + id + "."));
+    }
+
+
     public List<Car> getAll() {
 
         List<Car> cars = carRepository.findAll();
