@@ -60,9 +60,6 @@ function removeSpacesInFront(str: string): string {
 }
 
 
-export { objectValid, removeSpacesInFront };
-
-
 ///// helper methods
 
 
@@ -99,3 +96,6 @@ function isObjectEmpty(obj: any): boolean {
 
     return Object.keys(obj).length === 0;
 }
+
+
+export { objectValid, removeSpacesInFront, isObjectEmpty };

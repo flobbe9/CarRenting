@@ -30,7 +30,9 @@ async function saveCar(req, res, next) {
     }
 
     // redirecting request to spring API
-    res.send(await makeRequest(springDomain + "/car/saveCar", fetchHeaders));
+    const response = await makeRequest(springDomain + "/car/saveCar", fetchHeaders);
+    res.send(response);
+    return response;
 };
 
 
