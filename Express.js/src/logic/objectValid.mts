@@ -35,31 +35,6 @@
 }
 
 
-/**
- * Removes all space characters in front of a string and returns the modified version.
- * Leaves any other space character in the string as it is.         
- *  
- * @param str to remove spaces from.
- * @returns the modified string.
- */
-function removeSpacesInFront(str: string): string {
-
-    let idx = -1;
-
-    // iterating array of single characters of string
-    [...str].some((char, index) => {
-        
-        // setting current index
-        idx = index;
-
-        // break if the first non space character is found
-        return char !== " ";
-    });
-
-    return str.substring(idx);
-}
-
-
 ///// helper methods
 
 
@@ -98,4 +73,4 @@ function isObjectEmpty(obj: any): boolean {
 }
 
 
-export { objectValid, removeSpacesInFront, isObjectEmpty };
+export { objectValid, isObjectEmpty };

@@ -109,7 +109,7 @@ public class CarController {
 
     
     @DeleteMapping("/delete")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK, reason = "Deleted")
     public void delete(@RequestBody Car car) {
 
         carService.delete(car);

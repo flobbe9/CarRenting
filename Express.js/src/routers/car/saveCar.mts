@@ -14,13 +14,12 @@ import { carValid } from "../../logic/carValid.mjs";
  */
 async function saveCar(req, res, next) {
 
-    // if car is invalid
+    // case: request body invalid
     if (!carValid(req.body)) {
         res.send("Invalid car attribute.");
         return;
     }
 
-    // creating fetchHeaders
     const fetchHeaders: FetchHeader = {
         method: "post",
         headers: {
@@ -30,7 +29,7 @@ async function saveCar(req, res, next) {
     }
 
     // redirecting request to spring API
-    const response = await makeRequest(springDomain + "/car/saveCar", fetchHeaders);
+    const response = await makeRequest(springDomain + req.originalUrl, fetchHeaders);
     res.send(response);
     return response;
 };
