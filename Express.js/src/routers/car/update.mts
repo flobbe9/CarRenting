@@ -1,8 +1,11 @@
-import { getById } from "./getById.mjs";
 import { Car } from "../../interfaces/car.mjs";
 import { isObjectEmpty, objectValid } from "../../logic/objectValid.mjs";
 import { saveCar } from "./saveCar.mjs";
 import { carValid } from "../../logic/carValid.mjs";
+import { getAllBy } from "./getAllBy.mjs";
+import { FetchHeader } from "../../interfaces/fetchHeader.mjs";
+import { makeRequest } from "../../logic/fetchAPI.mjs";
+import { springDomain } from "../../main.mjs";
 
 
 /**
@@ -74,6 +77,21 @@ async function getOldCar(id: number) {
         return false;
 
     return oldCar;
+}
+
+
+async function getById(id: number) {
+
+    const fetchHeaders: FetchHeader = {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    
+    const response = await makeRequest(springDomain + `/car/getById?id=${id}`, fetchHeaders);
+
+    return response;
 }
 
 

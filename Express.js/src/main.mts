@@ -16,7 +16,7 @@ app.use(express.json());
 app.post("/**", (req, res, next) => {
 
     if (!objectValid(req.body))
-        throw "Invalid input.";
+        throw "Invalid request body.";
 
     next();
 });
