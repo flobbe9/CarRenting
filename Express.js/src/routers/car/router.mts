@@ -1,4 +1,5 @@
 import express from "express";
+import { deleteCar } from "./deleteCar.mjs";
 import { getAllBy } from "./getAllBy.mjs";
 import { getCar } from "./getCar.mjs";
 import { saveCar } from "./saveCar.mjs";
@@ -49,4 +50,4 @@ carRouter.get("/existsByModel", getAllBy);
 
 
 // path: /car/delete
-// carRouter.delete("/delete", );
+carRouter.delete("/delete", deleteCar);
