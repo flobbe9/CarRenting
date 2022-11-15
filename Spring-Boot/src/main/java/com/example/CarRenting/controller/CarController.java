@@ -33,7 +33,7 @@ public class CarController {
     }
 
 
-    @GetMapping("/getCar")
+    @PostMapping("/getCar")
     public Car getCar(@RequestParam("brand") String brand,
                       @RequestParam("model") String model,
                       @RequestParam("color") String color,
@@ -44,23 +44,23 @@ public class CarController {
     }
 
 
-    @GetMapping("/getAll")
-    public List<Car> getAll() {
-
-        return carService.getAll();
-    }
-
-
     @GetMapping("/getById")
     public Car getById(@RequestParam("id") Long id) {
 
         return carService.getById(id);
     }
+
+
+    @GetMapping("/getAll")
+    public List<Car> getAll() {
+
+        return carService.getAll();
+    }
     
     
     @GetMapping("/getAllByBrandAndModel")
     public List<Car> getAllByBrandAndModel(@RequestParam("brand") String brand,
-    @RequestParam("model") String model) {
+                                           @RequestParam("model") String model) {
         
         return carService.getAllByBrandAndModel(brand, model);
     }
