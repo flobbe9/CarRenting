@@ -65,10 +65,10 @@ public class CarService {
 
         // may contain douplicates
         List<Car> cars = carRepository.findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, 
-                                                                          model, 
-                                                                          Color.valueOf(color), 
-                                                                          FuelType.valueOf(fuelType), 
-                                                                          specificationId);
+                                                                                                model, 
+                                                                                                Color.valueOf(color), 
+                                                                                                FuelType.valueOf(fuelType), 
+                                                                                                specificationId);
         if (cars.isEmpty())
             throw new IllegalStateException("Could not find a car with these attributes.");
 
@@ -85,34 +85,19 @@ public class CarService {
 
     public List<Car> getAll() {
 
-        List<Car> cars = carRepository.findAll();
-
-        if (cars.isEmpty()) 
-            throw new IllegalStateException("Could not find any car.");
-
-        return cars;
+        return carRepository.findAll();
     }
 
 
     public List<Car> getAllByBrandAndModel(String brand, String model) {
         
-        List<Car> cars = carRepository.findAllByBrandAndModel(brand, model);
-
-        if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with brand " + brand + " and model " + model + "."); 
-
-        return cars;
+        return carRepository.findAllByBrandAndModel(brand, model);
     }
 
 
     public List<Car> getAllByIsAvailable(Boolean isAvailable) {
-
-        List<Car> cars = carRepository.findAllByIsAvailable(isAvailable);
-
-        if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car available.");
-
-        return cars;
+        
+        return carRepository.findAllByIsAvailable(isAvailable);
     }
 
 
@@ -124,13 +109,7 @@ public class CarService {
         // checking if input is an enum constant
         isEnum(fuelType, FuelType.values());
 
-        List<Car> cars = carRepository.findAllByFuelType(FuelType.valueOf(fuelType));
-
-        if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with fuelType " + fuelType + ".");
-        
-
-        return cars;
+        return carRepository.findAllByFuelType(FuelType.valueOf(fuelType));
     }
 
 
@@ -142,23 +121,13 @@ public class CarService {
         // checking if 'color' is a an enum constant
         isEnum(color, Color.values());
 
-        List<Car> cars = carRepository.findAllByColor(Color.valueOf(color));
-
-        if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with color " + color + ".");
-
-        return cars;
+        return carRepository.findAllByColor(Color.valueOf(color));
     }
 
 
     public List<Car> getAllBySpecifiaction(Specification specification) {
 
-        List<Car> cars = carRepository.findAllBySpecificationId(specification.getId());
-
-        if (cars.size() == 0) 
-            throw new IllegalStateException("Could not find any car with these exact specifications.");
-
-        return cars;
+        return   carRepository.findAllBySpecificationId(specification.getId());
     }
 
 
