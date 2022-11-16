@@ -3,7 +3,7 @@ version: "v2.10.2"
 services:
   express.js:
     build: ./Express.js
-    image: flobe10/car_renting-express:latest
+    image: flobbe10/car_renting-express:latest
     container_name: car_renting-express
     ports:
       - 4001:4001
