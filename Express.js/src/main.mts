@@ -2,7 +2,8 @@ import express from "express";
 import { objectValid } from "./logic/objectValid.mjs";
 import { carRouter } from "./routers/car/router.mjs";
 
-export const springDomain = "http://localhost:4002";
+// using localhost as default or any other if specified (e.g. in docker)
+export const springDomain = (process.argv[2]) ? `http://${process.argv[2]}:4002` : "http://localhost:4002";
 
 
 const app = express();
