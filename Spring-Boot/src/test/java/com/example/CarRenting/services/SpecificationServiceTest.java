@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -49,7 +47,7 @@ public class SpecificationServiceTest {
     @Order(1)
     void testGetSpecification() {
 
-        // adding car sothat a specification is in the db
+        // adding car so that a specification is in the db
         carService.saveCar(car);
 
         Specification addedSpecification = specificationService.getSpecification(specification.getNumSeats(), 
@@ -64,46 +62,45 @@ public class SpecificationServiceTest {
 
 
     @Test
+    @Order(2)
     void testGetAllByNumSeats() {
 
-        List<Specification> specifications = specificationService.getAllByNumSeats(specification.getNumSeats());
-        
-        assertFalse(specifications.isEmpty());
+        assertFalse(specificationService.getAllByNumSeats(specification.getNumSeats())
+                                        .isEmpty());
     }
 
 
     @Test 
     void testGetAllByNumSeatsGreaterThanEqual() {
 
-        // spcification with correct number of seats
-        List<Specification> specifications = specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats());
-        // spcification with too much seats
-        List<Specification> specificationsEmpty = specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats() + 1);
+        // spcification with correct number of seats expected
+        assertFalse(specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats())
+                                        .isEmpty());
 
-        assertFalse(specifications.isEmpty());
-        assertTrue(specificationsEmpty.isEmpty());
+        // spcification with too many seats expected
+        assertTrue(specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats() + 1)
+                                       .isEmpty());
     }
 
 
     @Test
     void testGetAllByWeightMax() {
 
-        List<Specification> specifications = specificationService.getAllByWeightMax(specification.getWeightMax());
-
-        assertFalse(specifications.isEmpty());
+        assertFalse(specificationService.getAllByWeightMax(specification.getWeightMax())
+                                        .isEmpty());
     }
 
 
     @Test
     void testGetAllByWeightUnladenLessThanEqual() {
 
-        // specification with correct weight unladen
-        List<Specification> specifications = specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen());
+        // specification with correct weight unladen expected
+        assertFalse(specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen())
+                                        .isEmpty()); 
+
         // specification with not enough weight unladen
-        List<Specification> specificationsEmpty = specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen() - 1);
-        
-        assertFalse(specifications.isEmpty());
-        assertTrue(specificationsEmpty.isEmpty());
+        assertTrue( specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen() - 1)
+                                        .isEmpty());
     }
 
 

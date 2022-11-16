@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -40,15 +41,32 @@ public class CarServiceTest {
                               FuelType.BENZINE, 
                               specification);
 
+    @BeforeEach
+    void restoreObjects() {
+
+        specification = new Specification(5, 
+                                          4, 
+                                          90,
+                                          180,
+                                          1100d,
+                                          2300d);
+
+        car = new Car("VW", 
+                      "Golf", 
+                      Color.RED, 
+                      FuelType.BENZINE, 
+                      specification);
+    }
+
                             
     @Test
     @Order(1)
     void testSaveCar() {
 
         // setting up falsy car attributes and correcting them afterwards
-        specification.setWeightMax(1d);
+        car.getSpecification().setWeightMax(1d);
         assertThrows(IllegalStateException.class, () -> carService.saveCar(car));
-        specification.setWeightMax(2300d);
+        car.getSpecification().setWeightMax(2300d);
 
         assertEquals(car, carService.saveCar(car));
     }
@@ -60,14 +78,13 @@ public class CarServiceTest {
 
         assertEquals(car, carService.getCar(car.getBrand(), 
                                             car.getModel(),
-                                            car.getColor().name(),
-                                            car.getFuelType().name(),
+                                            car.getColor().name().toLowerCase(),
+                                            car.getFuelType().name().toLowerCase(),
                                             car.getSpecification()));
     }
 
 
     @Test
-    @Order(3)
     void testGetAllByBrandAndModel() {
 
         assertFalse(carService.getAllByBrandAndModel(car.getBrand(),
@@ -77,25 +94,24 @@ public class CarServiceTest {
 
 
     @Test
-    @Order(4)
     void testGetAllByIsAvailable() {
 
-        assertFalse(carService.getAllByIsAvailable(true).isEmpty());
+        assertFalse(carService.getAllByIsAvailable(true)
+                              .isEmpty());
     }
 
 
     @Test
-    @Order(5) 
     void testGetAllBySpecifiaction() {
 
         specification.setId(1l);
 
-        assertFalse(carService.getAllBySpecifiaction(car.getSpecification()).isEmpty());
+        assertFalse(carService.getAllBySpecifiaction(car.getSpecification())
+                              .isEmpty());
     }
 
 
     @Test 
-    @Order(6)
     void testExistsByBrand() {
 
         assertTrue(carService.existsByBrand(car.getBrand()));
@@ -103,11 +119,10 @@ public class CarServiceTest {
 
 
     @Test
-    @Order(7)
     void testDelete() {
 
         carService.delete(car);
 
-        assertThrows(IllegalStateException.class, () -> carService.getAll().isEmpty());
+        assertTrue(carService.getAll().isEmpty());
     }
 }

@@ -71,9 +71,9 @@ public class CarControllerTest {
                                car.getColor().name(), 
                                car.getFuelType().name(), 
                                car.getSpecification()))
-            .thenReturn(car);
+                       .thenReturn(car);
         
-        mockMvc.perform(get("/car/getCar?brand=VW&model=Golf&color=rED&fuelType=BENzINE")
+        mockMvc.perform(post("/car/getCar?brand=VW&model=Golf&color=rED&fuelType=BENzINE")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectToJson(specification)))
                .andExpect(status().isOk())
