@@ -1,0 +1,36 @@
+version: "v2.10.2"
+
+services:
+  express.js:
+    build: ./Express.js
+    image: car_renting-express:latest
+    container_name: car_renting-express
+    ports:
+      - 4001:4001
+
+  spring-boot:
+    build: ./Spring-Boot
+    image: car_renting-spring_boot:latest
+    container_name: car_renting-spring_boot
+    ports: 
+      - 4002:4002
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/CarRenting
+      - SPRING_DATASOURCE_USERNAME=mysql
+      - SPRING_DATASOURCE_PASSWORD=mysql
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+
+  mysql:
+    image: mysql:latest
+    container_name: car_renting-mysql
+    ports: 
+      - 3306
+    environment:
+      - MYSQL_DATABASE=CarRenting
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+
+
