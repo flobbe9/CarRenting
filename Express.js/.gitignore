@@ -6,3 +6,6 @@ test.mts
 
 ### Node
 node_modules
+
+### Docker ###
+Dockerfile
