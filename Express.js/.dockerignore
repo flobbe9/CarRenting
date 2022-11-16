@@ -1,0 +1,12 @@
+### Docker ###
+Dockerfile
+
+### node ###
+node_modules/
+test.mts
+
+### VSCode ###
+.vscode
+
+### Other ###
+todo.txt
