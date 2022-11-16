@@ -1,13 +1,16 @@
+### Gradle ###
 HELP.md
 .gradle
 gradlew
 gradlew.bat
 settings.gradle
 build/
-gradle/wrapper/**
+gradle/
 !**/src/main/**/build/
 !**/src/test/**/build/
-todo.txt
+
+### Docker ###
+Dockerfile
 
 ### STS ###
 .apt_generated
@@ -39,3 +42,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Other ###
+todo.txt
