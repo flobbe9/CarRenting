@@ -3,14 +3,14 @@ version: "v2.10.2"
 services:
   express.js:
     build: ./Express.js
-    image: car_renting-express:latest
+    image: flobe10/car_renting-express:latest
     container_name: car_renting-express
     ports:
       - 4001:4001
 
   spring-boot:
     build: ./Spring-Boot
-    image: car_renting-spring_boot:latest
+    image: flobbe10/car_renting-spring_boot:latest
     container_name: car_renting-spring_boot
     ports: 
       - 4002:4002
