@@ -2,7 +2,7 @@ FROM node:latest
 
 # copy all files into workdir
 WORKDIR /Express.js
-COPY / /Express.js/
+ADD / /Express.js/
 
 # get typescript configurations
 RUN npm install typescript -g
