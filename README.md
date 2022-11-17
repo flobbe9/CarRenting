@@ -22,30 +22,34 @@ http://localhost:4001/car/existsByModel?model=Caddy
 
 ### Add (postman)
 http://localhost:4001/car/saveCar <br />
-    Note: - expecting a request body with a car <br />
-          - method: post
+Note: 
+- expecting a request body with a car <br />
+- method: post
 
 ### Update (postman)
 http://localhost:4001/car/update <br />
-    Note: - expecting a request body with a car but attributes may be null or missing completely <br />
-          - expecting request parameter 'id' with the id of the car to update <br />
-          - method: put 
+Note: 
+- expecting a request body with a car but attributes may be null or missing completely <br />
+- expecting request parameter 'id' with the id of the car to update <br />
+- method: put 
 
 ### Get (postman)
 http://localhost:4001/car/getCar <br />
-    Note: - expecting a request body with a specification <br />
-          - expecting request parameters 'brand', 'model', 'color' and 'fuelType' <br />
-          - method: post
+Note: 
+- expecting a request body with a specification <br />
+- expecting request parameters 'brand', 'model', 'color' and 'fuelType' <br />
+- method: post
 
 ### Delete (postman)
 http://localhost:4001/car/delete <br />
-    Note: - expecting a request body with a <br />
-          - method: delete
+Note: <br />
+- expecting a request body with a <br />
+- method: delete
 
 ## How to use with Docker
-To use CarRenting with Docker, pull the following images from dockerhub:
-`docker pull mysql` <br />
-`docker pull flobbe10/car_renting-spring_boot` <br />
-`docker pull flobbe10/car_renting-express` <br /><br />
+To use CarRenting with Docker, pull the following images from dockerhub: <br />
+- `docker pull mysql` <br />
+- `docker pull flobbe10/car_renting-spring_boot` <br />
+- `docker pull flobbe10/car_renting-express` <br />
 
 After that, copy the docker-compose.yml at the project root and `docker-compose up` will do the rest for you.
