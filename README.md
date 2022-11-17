@@ -22,27 +22,23 @@ http://localhost:4001/car/existsByModel?model=Caddy
 
 ### Add (postman)
 http://localhost:4001/car/saveCar <br />
-Note: 
 - expecting a request body with a car <br />
 - method: post
 
 ### Update (postman)
 http://localhost:4001/car/update <br />
-Note: 
 - expecting a request body with a car but attributes may be null or missing completely <br />
 - expecting request parameter 'id' with the id of the car to update <br />
 - method: put 
 
 ### Get (postman)
 http://localhost:4001/car/getCar <br />
-Note: 
 - expecting a request body with a specification <br />
 - expecting request parameters 'brand', 'model', 'color' and 'fuelType' <br />
 - method: post
 
 ### Delete (postman)
 http://localhost:4001/car/delete <br />
-Note: <br />
 - expecting a request body with a <br />
 - method: delete
 
