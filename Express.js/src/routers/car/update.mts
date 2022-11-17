@@ -2,7 +2,6 @@ import { Car } from "../../interfaces/car.mjs";
 import { isObjectEmpty, objectValid } from "../../logic/objectValid.mjs";
 import { saveCar } from "./saveCar.mjs";
 import { carValid } from "../../logic/carValid.mjs";
-import { getAllBy } from "./getAllBy.mjs";
 import { FetchHeader } from "../../interfaces/fetchHeader.mjs";
 import { makeRequest } from "../../logic/fetchAPI.mjs";
 import { springDomain } from "../../main.mjs";
@@ -46,6 +45,7 @@ async function update(req, res, next) {
 
     // make request to spring
     req.body = updatedCar;
+    req.originalUrl = "/car/saveCar";
     return saveCar(req, res, next);
 }
 

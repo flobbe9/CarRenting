@@ -16,9 +16,11 @@ app.use(express.json());
 // assuming that every post request has a request body
 app.post("/**", (req, res, next) => {
 
-    if (!objectValid(req.body))
-        throw "Invalid request body.";
-
+    if (!objectValid(req.body)) {
+        res.send("Invalid request body.");
+        return;
+    }
+    
     next();
 });
 
