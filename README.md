@@ -39,4 +39,13 @@ http://localhost:4001/car/getCar
 
 ### Delete (postman)
 http://localhost:4001/car/delete
-    Note: - expecting a request body with a car
+    Note: - expecting a request body with a
+          - method: delete
+
+## Use with Docker
+To use CarRenting with Docker, pull the following images from dockerhub:
+`docker pull mysql`
+`docker pull flobbe10/car_renting-spring_boot`
+`docker pull flobbe10/car_renting-express`
+
+After that, copy the docker-compose.yml at the project root and `docker-compose up` will do the rest for you.
