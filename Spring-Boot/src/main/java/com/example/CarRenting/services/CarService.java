@@ -161,6 +161,12 @@ public class CarService {
     }
 
 
+    public void deleteAll() {
+
+        carRepository.deleteAll();
+    }
+
+
 /////// helper methods:
 
     /**
