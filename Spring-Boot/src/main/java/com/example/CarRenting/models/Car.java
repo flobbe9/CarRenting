@@ -1,7 +1,6 @@
 package com.example.CarRenting.models;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,7 +18,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 
 /**
@@ -32,6 +33,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 public class Car {
     
@@ -40,18 +42,18 @@ public class Car {
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @Column(nullable = false)
+    @NonNull
     private String brand;
 
-    @Column(nullable = false)
+    @NonNull
     private String model;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @NonNull
     private Color color;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @NonNull
     private FuelType fuelType;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -59,7 +61,7 @@ public class Car {
     @JsonManagedReference
     private Specification specification;
 
-    @Column(nullable = false)
+    @NonNull
     @EqualsAndHashCode.Exclude
     private Boolean isAvailable = true;
 
@@ -75,11 +77,5 @@ public class Car {
         this.color = color;
         this.fuelType = fuelType;
         this.specification = specification;
-    }
-
-
-    @Override
-    public String toString() {
-        return this.brand + " " + this.model + ", " + this.color + ", " + this.fuelType;
     }
 }

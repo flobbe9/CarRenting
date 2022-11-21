@@ -1,6 +1,5 @@
 package com.example.CarRenting.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 
 /**
@@ -29,6 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 public class Specification {
     
@@ -37,29 +39,30 @@ public class Specification {
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @Column(nullable = false)
+    @NonNull
     private Integer numSeats;
 
-    @Column(nullable = false)
+    @NonNull
     private Integer numDoors;
 
-    @Column(nullable = false)
+    @NonNull
     private Integer hp;
 
-    @Column(nullable = false)
+    @NonNull
     private Integer speedMax;
 
     /** Weight of a car without any charge, fuel etc. */
-    @Column(nullable = false)
+    @NonNull
     private Double weightUnladen;
 
     /** Allowed total weight of an unladen car plus charge, fuel etc. */
-    @Column(nullable = false)
+    @NonNull
     private Double weightMax;
 
     @OneToOne
-    @JoinColumn(name = "car_id", nullable = false)
+    @JoinColumn(name = "car_id")
     @JsonBackReference
+    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Car car;
 
@@ -77,17 +80,5 @@ public class Specification {
         this.speedMax = speedMax;
         this.weightUnladen = weightUnladen;
         this.weightMax = weightMax;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Num seats: " + this.numSeats + "\n" + 
-               "Num doors: " + this.numDoors + "\n" +
-               "Hp: " + this.hp + "\n" +
-               "Speed max: " + this.speedMax + "\n" +
-               "Weight unladen: " + this.weightUnladen + "\n" +
-               "Weight max: " + this.weightMax + "\n" +
-               "Car: " + this.car;
     }
 }
