@@ -44,6 +44,10 @@ public class CarServiceTest {
     @BeforeEach
     void restoreObjects() {
 
+        // deleting all cars added by data.sql
+        carService.deleteAll();
+
+        // resetting mock data
         specification = new Specification(5, 
                                           4, 
                                           90,
@@ -56,12 +60,19 @@ public class CarServiceTest {
                       Color.RED, 
                       FuelType.BENZINE, 
                       specification);
+
+        // adding mock data to database if it was deleted
+        if (carService.getAll().isEmpty())
+            carService.saveCar(car);
     }
 
                             
     @Test
     @Order(1)
     void testSaveCar() {
+
+        // deleting all cars, that were inserted by data.sql
+        carService.deleteAll();
 
         // setting up falsy car attributes and correcting them afterwards
         car.getSpecification().setWeightMax(1d);
@@ -103,9 +114,7 @@ public class CarServiceTest {
 
     @Test
     void testGetAllBySpecifiaction() {
-
-        specification.setId(1l);
-
+        
         assertFalse(carService.getAllBySpecifiaction(car.getSpecification())
                               .isEmpty());
     }

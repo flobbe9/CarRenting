@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -42,6 +43,30 @@ public class SpecificationServiceTest {
                               FuelType.BENZINE, 
                               specification);
 
+    @BeforeEach
+    void restoreObjects() {
+
+        // deleting all cars added by data.sql
+        carService.deleteAll();
+
+        // resetting mock data
+        specification = new Specification(5, 
+                                        4, 
+                                        90,
+                                        180,
+                                        1100d,
+                                        2300d);
+
+        car = new Car("VW", 
+                    "Golf", 
+                    Color.RED, 
+                    FuelType.BENZINE, 
+                    specification);
+
+        // adding mock data to database if it was deleted
+        if (carService.getAll().isEmpty())
+            carService.saveCar(car);
+    }
 
     @Test
     @Order(1)
