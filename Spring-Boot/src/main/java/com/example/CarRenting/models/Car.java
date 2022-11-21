@@ -55,7 +55,7 @@ public class Car {
     private FuelType fuelType;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "specifiaction_id")
+    @JoinColumn(name = "specifiaction_id", nullable = false)
     @JsonManagedReference
     private Specification specification;
 

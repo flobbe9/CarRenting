@@ -58,7 +58,7 @@ public class Specification {
     private Double weightMax;
 
     @OneToOne
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car_id", nullable = false)
     @JsonBackReference
     @EqualsAndHashCode.Exclude
     private Car car;
