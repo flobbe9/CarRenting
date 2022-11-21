@@ -13,6 +13,13 @@ import com.example.CarRenting.models.Specification;
 import com.example.CarRenting.repositories.CarRepository;
 
 
+/**
+ * Class handling the more complex methods for the Car class.
+ * 
+ * @see Car
+ * @since 1.0
+ * @author Florin Schikarski
+ */
 @Service
 public class CarService {
     

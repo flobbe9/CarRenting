@@ -8,6 +8,13 @@ import org.springframework.stereotype.Repository;
 import com.example.CarRenting.models.Specification;
 
 
+/**
+ * Interface that implements JpaRepository. Contains query methods for the Specification entity.
+ * 
+ * @see Specification
+ * @since 1.0
+ * @author Florin Schikarski
+ */
 @Repository
 public interface SpecificationRepository extends JpaRepository<Specification, Long> {
     

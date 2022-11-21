@@ -10,6 +10,13 @@ import com.example.CarRenting.enums.FuelType;
 import com.example.CarRenting.models.Car;
 
 
+/**
+ * Interface that implements JpaRepository. Contains query methods for the Car entity.
+ * 
+ * @see Car
+ * @since 1.0
+ * @author Florin Schikarski
+ */
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
 

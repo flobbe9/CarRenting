@@ -18,6 +18,13 @@ import com.example.CarRenting.models.Specification;
 import com.example.CarRenting.services.CarService;
 
 
+/**
+ * Class handling all http requests related to the Car entity.
+ * 
+ * @see Car
+ * @since 1.0
+ * @author Florin Schikarski
+ */
 @RestController
 @RequestMapping("/car")
 public class CarController {

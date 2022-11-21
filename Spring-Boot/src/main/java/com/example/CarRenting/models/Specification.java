@@ -21,6 +21,9 @@ import lombok.Setter;
  * <p>
  * All units are assumed to be german. Contains converting methods for speed(km/h to mp/h) and
  * weight(kg to pounds).
+ * 
+ * @since 1.0
+ * @author Florin Schikarski
  */
 @Entity
 @NoArgsConstructor

@@ -24,6 +24,9 @@ import lombok.Setter;
 
 /**
  * Class of car Objects that can be rented.
+ * 
+ * @since 1.0
+ * @author Florin Schikarski
  */
 @Entity
 @NoArgsConstructor

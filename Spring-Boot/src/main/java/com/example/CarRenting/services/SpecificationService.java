@@ -9,6 +9,13 @@ import com.example.CarRenting.models.Specification;
 import com.example.CarRenting.repositories.SpecificationRepository;
 
 
+/**
+ * Class handling the more complex methods for the Specification class.
+ * 
+ * @see Specification
+ * @since 1.0
+ * @author Florin Schikarski
+ */
 @Service
 public class SpecificationService {
     
