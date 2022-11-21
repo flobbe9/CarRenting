@@ -41,10 +41,10 @@ public class CarController {
 
 
     @PostMapping("/getCar")
-    public Car getCar(@RequestParam("brand") String brand,
-                      @RequestParam("model") String model,
-                      @RequestParam("color") String color,
-                      @RequestParam("fuelType") String fuelType,
+    public Car getCar(@RequestParam String brand,
+                      @RequestParam String model,
+                      @RequestParam String color,
+                      @RequestParam String fuelType,
                       @RequestBody Specification specification) {
 
         return carService.getCar(brand, model, color, fuelType, specification);
@@ -52,7 +52,7 @@ public class CarController {
 
 
     @GetMapping("/getById")
-    public Car getById(@RequestParam("id") Long id) {
+    public Car getById(@RequestParam Long id) {
 
         return carService.getById(id);
     }
@@ -66,50 +66,50 @@ public class CarController {
     
     
     @GetMapping("/getAllByBrandAndModel")
-    public List<Car> getAllByBrandAndModel(@RequestParam("brand") String brand,
-                                           @RequestParam("model") String model) {
+    public List<Car> getAllByBrandAndModel(@RequestParam String brand,
+                                           @RequestParam String model) {
         
         return carService.getAllByBrandAndModel(brand, model);
     }
     
     
     @GetMapping("/getAllByIsAvailable")
-    public List<Car> getAllByIsAvailable(@RequestParam("isAvailable") Boolean isAvailable) {
+    public List<Car> getAllByIsAvailable(@RequestParam Boolean isAvailable) {
         
         return carService.getAllByIsAvailable(isAvailable);
     }
 
 
     @GetMapping("/getAllByFuelType")
-    public List<Car> getAllByFuelType(@RequestParam("fuelType") String fuelType) {
+    public List<Car> getAllByFuelType(@RequestParam String fuelType) {
 
         return carService.getAllByFuelType(fuelType);
     }
 
 
     @GetMapping("/getAllByColor")
-    public List<Car> getAllByColor(@RequestParam("color") String color) {
+    public List<Car> getAllByColor(@RequestParam String color) {
 
         return carService.getAllByColor(color);
     }
 
 
     @GetMapping("/getAllBySpecification")
-    public List<Car> getAllBySpecification(@RequestParam("specification") Specification specification) {
+    public List<Car> getAllBySpecification(@RequestParam Specification specification) {
 
         return carService.getAllBySpecifiaction(specification);
     }
 
 
     @GetMapping("/existsByBrand")
-    public boolean existsByBrand(@RequestParam("brand") String brand) {
+    public boolean existsByBrand(@RequestParam String brand) {
 
         return carService.existsByBrand(brand);
     }
 
 
     @GetMapping("/existsByModel")
-    public boolean existsByModel(@RequestParam("model") String model) {
+    public boolean existsByModel(@RequestParam String model) {
 
         return carService.existsByModel(model);
     }
