@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.example.CarRenting.enums.Color;
 import com.example.CarRenting.enums.FuelType;
@@ -18,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -42,18 +43,18 @@ public class Car {
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @NonNull
+    @NotEmpty
     private String brand;
 
-    @NonNull
+    @NotEmpty
     private String model;
 
     @Enumerated(EnumType.STRING)
-    @NonNull
+    @NotNull
     private Color color;
 
     @Enumerated(EnumType.STRING)
-    @NonNull
+    @NotNull
     private FuelType fuelType;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -61,7 +62,7 @@ public class Car {
     @JsonManagedReference
     private Specification specification;
 
-    @NonNull
+    @NotNull
     @EqualsAndHashCode.Exclude
     private Boolean isAvailable = true;
 

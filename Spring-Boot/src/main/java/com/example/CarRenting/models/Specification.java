@@ -6,13 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -39,24 +41,30 @@ public class Specification {
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @NonNull
+    @NotNull
+    @Min(1)
     private Integer numSeats;
 
-    @NonNull
+    @NotNull
+    @Min(1)
     private Integer numDoors;
 
-    @NonNull
+    @NotNull
+    @Min(0)
     private Integer hp;
 
-    @NonNull
+    @NotNull
+    @Min(0)
     private Integer speedMax;
 
     /** Weight of a car without any charge, fuel etc. */
-    @NonNull
+    @NotNull
+    @DecimalMin("0.0")
     private Double weightUnladen;
 
     /** Allowed total weight of an unladen car plus charge, fuel etc. */
-    @NonNull
+    @NotNull
+    @DecimalMin("0.0")
     private Double weightMax;
 
     @OneToOne
