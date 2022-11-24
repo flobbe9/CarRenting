@@ -37,16 +37,16 @@ public class SpecificationService {
 
     public Specification getSpecification(int numSeats,
                                           int numDoors, 
-                                          int hp,
+                                          int horsePower,
                                           int speedMax,
                                           double weightUnladen,
                                           double weightMax) {
 
         // may contain douplicates         
         List<Specification> specifications = specificationRepository
-                                                .findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(numSeats, 
+                                                .findByNumSeatsAndNumDoorsAndHorsePowerAndSpeedMaxAndWeightUnladenAndWeightMax(numSeats, 
                                                                                                                        numDoors, 
-                                                                                                                       hp, 
+                                                                                                                       horsePower, 
                                                                                                                        speedMax, 
                                                                                                                        weightUnladen, 
                                                                                                                        weightMax);
@@ -83,15 +83,15 @@ public class SpecificationService {
     }
 
 
-    public List<Specification> getAllByHp(int hp) {
+    public List<Specification> getAllByHorsePower(int horsePower) {
 
-        return specificationRepository.findAllByHp(hp);
+        return specificationRepository.findAllByHorsePower(horsePower);
     }
 
 
-    public List<Specification> getAllByHpGreaterThanEqual(int hp) {
+    public List<Specification> getAllByHorsePowerGreaterThanEqual(int horsePower) {
 
-        return specificationRepository.findAllByHpGreaterThanEqual(hp);
+        return specificationRepository.findAllByHorsePowerGreaterThanEqual(horsePower);
     }
 
 

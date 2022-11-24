@@ -77,7 +77,7 @@ public class SpecificationServiceTest {
 
         Specification addedSpecification = specificationService.getSpecification(specification.getNumSeats(), 
                                                                                  specification.getNumDoors(),
-                                                                                 specification.getHp(), 
+                                                                                 specification.getHorsePower(), 
                                                                                  specification.getSpeedMax(), 
                                                                                  specification.getWeightUnladen(),
                                                                                  specification.getWeightMax());

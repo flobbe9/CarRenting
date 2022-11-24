@@ -18,9 +18,9 @@ import com.example.CarRenting.models.Specification;
 @Repository
 public interface SpecificationRepository extends JpaRepository<Specification, Long> {
     
-    List<Specification> findByNumSeatsAndNumDoorsAndHpAndSpeedMaxAndWeightUnladenAndWeightMax(Integer numSeats,
+    List<Specification> findByNumSeatsAndNumDoorsAndHorsePowerAndSpeedMaxAndWeightUnladenAndWeightMax(Integer numSeats,
                                                                                               Integer numDoors,
-                                                                                              Integer hp, 
+                                                                                              Integer horsePower, 
                                                                                               Integer speedMax,
                                                                                               Double weightUnladen,
                                                                                               Double weightMax);
@@ -31,9 +31,9 @@ public interface SpecificationRepository extends JpaRepository<Specification, Lo
 
     List<Specification> findAllByNumDoors(Integer numDoors);
 
-    List<Specification> findAllByHp(Integer hp);
+    List<Specification> findAllByHorsePower(Integer horsePower);
 
-    List<Specification> findAllByHpGreaterThanEqual(Integer hp);
+    List<Specification> findAllByHorsePowerGreaterThanEqual(Integer horsePower);
 
     List<Specification> findAllBySpeedMax(Integer speedMax);
 

@@ -51,7 +51,7 @@ public class Specification {
 
     @NotNull
     @Min(0)
-    private Integer hp;
+    private Integer horsePower;
 
     @NotNull
     @Min(0)
@@ -77,14 +77,14 @@ public class Specification {
 
     public Specification(Integer numSeats, 
                          Integer numDoors, 
-                         Integer hp, 
+                         Integer horsePower, 
                          Integer speedMax, 
                          Double weightUnladen,
                          Double weightMax) {
                             
         this.numSeats = numSeats;
         this.numDoors = numDoors;
-        this.hp = hp;
+        this.horsePower = horsePower;
         this.speedMax = speedMax;
         this.weightUnladen = weightUnladen;
         this.weightMax = weightMax;

@@ -54,7 +54,7 @@ public class CarService {
         // getting id of specification for jpa method
         long specificationId = specificationService.getSpecification(specification.getNumSeats(), 
                                                                      specification.getNumDoors(), 
-                                                                     specification.getHp(),
+                                                                     specification.getHorsePower(),
                                                                      specification.getSpeedMax(), 
                                                                      specification.getWeightUnladen(),
                                                                      specification.getWeightMax())
