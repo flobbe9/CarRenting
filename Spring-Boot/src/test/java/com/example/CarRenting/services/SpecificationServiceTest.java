@@ -44,7 +44,7 @@ public class SpecificationServiceTest {
                               specification);
 
     @BeforeEach
-    void restoreObjects() {
+    void resetMockDataAndDB() {
 
         // deleting all cars added by data.sql
         carService.deleteAll();
@@ -64,13 +64,13 @@ public class SpecificationServiceTest {
                     specification);
 
         // adding mock data to database if it was deleted
-        if (carService.getAll().isEmpty())
-            carService.saveCar(car);
+        carService.saveCar(car);
     }
+
 
     @Test
     @Order(1)
-    void testGetSpecification() {
+    void getSpecification_shouldBeEqual_ifExists() {
 
         // adding car so that a specification is in the db
         carService.saveCar(car);
@@ -88,7 +88,7 @@ public class SpecificationServiceTest {
 
     @Test
     @Order(2)
-    void testGetAllByNumSeats() {
+    void getAllByNumSeats_listShouldNotBeEmpty() {
 
         assertFalse(specificationService.getAllByNumSeats(specification.getNumSeats())
                                         .isEmpty());
@@ -96,20 +96,23 @@ public class SpecificationServiceTest {
 
 
     @Test 
-    void testGetAllByNumSeatsGreaterThanEqual() {
+    void getAllByNumSeatsGreaterThanEqual_listShouldNotBeEmpty_ifNumSeatsIsSmallEnough() {
 
-        // spcification with correct number of seats expected
         assertFalse(specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats())
                                         .isEmpty());
+    }
 
-        // spcification with too many seats expected
+
+    @Test 
+    void getAllByNumSeatsGreaterThanEqual_listShouldBeEmpty_ifNumSeatsIsTooBig() {
+
         assertTrue(specificationService.getAllByNumSeatsGreaterThanEqual(specification.getNumSeats() + 1)
                                        .isEmpty());
     }
 
 
     @Test
-    void testGetAllByWeightMax() {
+    void getAllByWeightMax_listShouldNotBeEmpty() {
 
         assertFalse(specificationService.getAllByWeightMax(specification.getWeightMax())
                                         .isEmpty());
@@ -117,20 +120,23 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void testGetAllByWeightUnladenLessThanEqual() {
+    void getAllByWeightUnladenLessThanEqual_listShouldNotBeEmtpy_ifWeightUnladenIsBigEnough() {
 
-        // specification with correct weight unladen expected
         assertFalse(specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen())
                                         .isEmpty()); 
+    }
 
-        // specification with not enough weight unladen
+
+    @Test
+    void getAllByWeightUnladenLessThanEqual_listShouldBeEmpty_ifWeightUnladenIsTooSmall() {
+
         assertTrue( specificationService.getAllByWeightUnladenLessThanEqual(specification.getWeightUnladen() - 1)
                                         .isEmpty());
     }
 
 
     @Test
-    void testKmhToMph() {
+    void kmhToMph_shouldBeTrue() {
 
         // converting 100 km/h to mph
         assertEquals(62.13711922, specificationService.kmhToMph(100));
@@ -138,7 +144,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void testMphToKmh() {
+    void mphToKmh_shouldBeTrue() {
 
         // converting 100 mph to km/h
         assertEquals(160.9344, specificationService.mphToKmh(100));
@@ -146,7 +152,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void testKgToPounds() {
+    void kgToPounds_shouldBeTrue() {
 
         // converting 100 kg to pounds
         assertEquals(220.46226218500001, specificationService.kgToPounds(100));
@@ -154,7 +160,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void testPountdsToKg() {
+    void pountdsToKg_shouldBeTrue() {
 
         // converting 100 kg to pounds
         assertEquals(45.359237, specificationService.poundsToKg(100));

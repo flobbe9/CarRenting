@@ -11,6 +11,10 @@ import com.example.CarRenting.repositories.SpecificationRepository;
 
 /**
  * Class handling the more complex methods for the Specification class.
+ * <p>
+ * km/h = kilometers per hour
+ * <p>
+ * mph = miles per hour
  * 
  * @see Specification
  * @since 1.0

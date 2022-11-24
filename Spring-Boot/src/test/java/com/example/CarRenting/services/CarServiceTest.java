@@ -42,7 +42,7 @@ public class CarServiceTest {
                               specification);
 
     @BeforeEach
-    void restoreObjects() {
+    void resetMockDataAndDB() {
 
         // deleting all cars added by data.sql
         carService.deleteAll();
@@ -61,31 +61,32 @@ public class CarServiceTest {
                       FuelType.BENZINE, 
                       specification);
 
-        // adding mock data to database if it was deleted
-        if (carService.getAll().isEmpty())
-            carService.saveCar(car);
+        // adding mock data to database
+        carService.saveCar(car);
     }
 
                             
     @Test
     @Order(1)
-    void testSaveCar() {
+    void saveCar_shouldThrowException_ifWeightMaxLessThanWeightUnladen() {
 
-        // deleting all cars, that were inserted by data.sql
-        carService.deleteAll();
-
-        // setting up falsy car attributes and correcting them afterwards
         car.getSpecification().setWeightMax(1d);
-        assertThrows(IllegalStateException.class, () -> carService.saveCar(car));
-        car.getSpecification().setWeightMax(2300d);
 
-        assertEquals(car, carService.saveCar(car));
+        assertThrows(IllegalStateException.class, () -> carService.saveCar(car));
     }
 
 
     @Test
     @Order(2)
-    void testGetCar() {
+    void saveCar_shouldBeEqual_ifReturnsSavedCar() {
+
+        assertEquals(car, carService.saveCar(car));
+    }
+    
+
+    @Test
+    @Order(3)
+    void getCar_shouldBeEqual_ifFindsCar() {
 
         assertEquals(car, carService.getCar(car.getBrand(), 
                                             car.getModel(),
@@ -96,7 +97,7 @@ public class CarServiceTest {
 
 
     @Test
-    void testGetAllByBrandAndModel() {
+    void getAllByBrandAndModel_carListShouldNotBeEmpty() {
 
         assertFalse(carService.getAllByBrandAndModel(car.getBrand(),
                                                      car.getModel())
@@ -105,7 +106,7 @@ public class CarServiceTest {
 
 
     @Test
-    void testGetAllByIsAvailable() {
+    void getAllByIsAvailable_carListShouldNotBeEmpty() {
 
         assertFalse(carService.getAllByIsAvailable(true)
                               .isEmpty());
@@ -113,7 +114,7 @@ public class CarServiceTest {
 
 
     @Test
-    void testGetAllBySpecifiaction() {
+    void getAllBySpecifiaction_carListShouldNotBeEmpty() {
         
         assertFalse(carService.getAllBySpecifiaction(car.getSpecification())
                               .isEmpty());
@@ -121,14 +122,14 @@ public class CarServiceTest {
 
 
     @Test 
-    void testExistsByBrand() {
+    void existsByBrand_shouldBeTrue_ifExists() {
 
         assertTrue(carService.existsByBrand(car.getBrand()));
     }
 
 
     @Test
-    void testDelete() {
+    void delete_carListShouldBeEmpty() {
 
         carService.delete(car);
 

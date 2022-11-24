@@ -49,7 +49,7 @@ public class CarControllerTest {
 
 
     @Test
-    void testAddNew() throws JsonProcessingException, Exception {
+    void addNew_expectHttp200() throws JsonProcessingException, Exception {
 
         when(carService.saveCar(car))
             .thenReturn(car);
@@ -64,7 +64,7 @@ public class CarControllerTest {
 
 
     @Test
-    void testGetCar() throws Exception {
+    void getCar_expectHttp200() throws Exception {
 
         when(carService.getCar(car.getBrand(), 
                                car.getModel(), 
@@ -83,7 +83,7 @@ public class CarControllerTest {
 
 
     @Test
-    void testGetAllByBrandAndModel() throws Exception {
+    void getAllByBrandAndModel_expectHttp200() throws Exception {
         
         when(carService.getAllByBrandAndModel(car.getBrand(), car.getModel()))
             .thenReturn(Arrays.asList(car));
@@ -96,7 +96,7 @@ public class CarControllerTest {
 
 
     @Test
-    void testExistsByModel() throws Exception {
+    void existsByModel_expectHttp200() throws Exception {
         
         when(carService.existsByModel(car.getModel()))
             .thenReturn(true);
@@ -109,7 +109,7 @@ public class CarControllerTest {
 
 
     @Test 
-    void testDelete() throws Exception {
+    void delete_expectHttp200() throws Exception {
 
         mockMvc.perform(delete("/car/delete")
                         .contentType(MediaType.APPLICATION_JSON)
