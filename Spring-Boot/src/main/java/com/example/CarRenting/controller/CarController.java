@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.CarRenting.enums.Color;
+import com.example.CarRenting.enums.FuelType;
 import com.example.CarRenting.models.Car;
 import com.example.CarRenting.models.Specification;
 import com.example.CarRenting.services.CarService;
@@ -43,8 +45,8 @@ public class CarController {
     @PostMapping("/getCar")
     public Car getCar(@RequestParam String brand,
                       @RequestParam String model,
-                      @RequestParam String color,
-                      @RequestParam String fuelType,
+                      @RequestParam Color color,
+                      @RequestParam FuelType fuelType,
                       @RequestBody Specification specification) {
 
         return carService.getCar(brand, model, color, fuelType, specification);
@@ -81,14 +83,14 @@ public class CarController {
 
 
     @GetMapping("/getAllByFuelType")
-    public List<Car> getAllByFuelType(@RequestParam String fuelType) {
+    public List<Car> getAllByFuelType(@RequestParam FuelType fuelType) {
 
         return carService.getAllByFuelType(fuelType);
     }
 
 
     @GetMapping("/getAllByColor")
-    public List<Car> getAllByColor(@RequestParam String color) {
+    public List<Car> getAllByColor(@RequestParam Color color) {
 
         return carService.getAllByColor(color);
     }

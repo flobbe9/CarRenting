@@ -1,6 +1,5 @@
 package com.example.CarRenting.services;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,8 @@ public class CarService {
 
     public Car getCar(String brand,
                       String model,
-                      String color,
-                      String fuelType,
+                      Color color,
+                      FuelType fuelType,
                       Specification specification) {
 
         // getting id of specification for jpa method
@@ -60,19 +59,11 @@ public class CarService {
                                                                      specification.getWeightMax())
                                                    .getId();
 
-        // making fuelType and color upperCase for comparison
-        fuelType = fuelType.toUpperCase();
-        color = color.toUpperCase();
-
-        // checking if color and fuelType are enum constants
-        isEnum(color, Color.values());
-        isEnum(fuelType, FuelType.values());
-
         // may contain douplicates
         List<Car> cars = carRepository.findByBrandAndModelAndColorAndFuelTypeAndSpecificationId(brand, 
                                                                                                 model, 
-                                                                                                Color.valueOf(color), 
-                                                                                                FuelType.valueOf(fuelType), 
+                                                                                                color, 
+                                                                                                fuelType, 
                                                                                                 specificationId);
         if (cars.isEmpty())
             throw new IllegalStateException("Could not find a car with these attributes.");
@@ -106,27 +97,15 @@ public class CarService {
     }
 
 
-    public List<Car> getAllByFuelType(String fuelType) {
+    public List<Car> getAllByFuelType(FuelType fuelType) {
 
-        // making fuelType upperCase for comparison
-        fuelType = fuelType.toUpperCase();
-
-        // checking if input is an enum constant
-        isEnum(fuelType, FuelType.values());
-
-        return carRepository.findAllByFuelType(FuelType.valueOf(fuelType));
+        return carRepository.findAllByFuelType(fuelType);
     }
 
 
-    public List<Car> getAllByColor(String color) {
+    public List<Car> getAllByColor(Color color) {
 
-        // making fuelType upperCase for comparison
-        color = color.toUpperCase();
-
-        // checking if 'color' is a an enum constant
-        isEnum(color, Color.values());
-
-        return carRepository.findAllByColor(Color.valueOf(color));
+        return carRepository.findAllByColor(color);
     }
 
 
@@ -153,8 +132,8 @@ public class CarService {
         // getting a single car because the repo may find douplicates
         car = getCar(car.getBrand(), 
                      car.getModel(), 
-                     car.getColor().name(), 
-                     car.getFuelType().name(), 
+                     car.getColor(), 
+                     car.getFuelType(), 
                      car.getSpecification());
 
         carRepository.delete(car);
@@ -180,26 +159,6 @@ public class CarService {
 
         // checking specification
         specificationService.isValid(car.getSpecification());
-
-        return true;
-    }
-
-
-    /**
-     * Checks if given enum contains 'str'.
-     * 
-     * @param <T> the enum.
-     * @param str the String that might be included in the enum.
-     * @param enumArray array with all enum constants.
-     * @return true if array contains the String.
-     */
-    private<T> boolean isEnum(String str, T[] enumArray) {
-
-        boolean isEnum = Arrays.stream(enumArray)
-                               .anyMatch(enumConstant -> enumConstant.toString().equals(str));
-        
-        if (!isEnum) 
-            throw new IllegalStateException("String input is not an enum constant.");
 
         return true;
     }

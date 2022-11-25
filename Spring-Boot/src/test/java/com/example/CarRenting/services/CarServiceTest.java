@@ -90,8 +90,8 @@ public class CarServiceTest {
 
         assertEquals(car, carService.getCar(car.getBrand(), 
                                             car.getModel(),
-                                            car.getColor().name().toLowerCase(),
-                                            car.getFuelType().name().toLowerCase(),
+                                            car.getColor(),
+                                            car.getFuelType(),
                                             car.getSpecification()));
     }
 
