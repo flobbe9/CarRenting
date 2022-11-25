@@ -1,7 +1,7 @@
 -- Active: 1667982561949@@127.0.0.1@3306@carrenting
 
-INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(1, "Vokswagen", "Caddy", "RED", "BENZINE", 1, true);
-INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(2, "Vokswagen", "Golf VIII", "YELLOW", "DIESEL", 2, true);
+INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(1, "Volkswagen", "Caddy", "RED", "BENZINE", 1, true);
+INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(2, "Volkswagen", "Golf VIII", "YELLOW", "DIESEL", 2, true);
 INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(3, "Audi", "A1 Sportback", "SILVER", "BENZINE", 3, true);
 INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(4, "Tesla", "Model X", "WHITE", "ELECTRIC", 4, true);
 INSERT INTO car(id, brand, model, color, fuel_type, specifiaction_id, is_available) VALUES(5, "Lamborghini", "Aventador LP 780-4 Roadster", "BLUE", "BENZINE", 5, true);
