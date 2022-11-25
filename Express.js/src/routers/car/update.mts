@@ -1,27 +1,28 @@
 import { Car } from "../../interfaces/car.mjs";
-import { isObjectEmpty, objectValid } from "../../logic/objectValid.mjs";
-import { saveCar } from "./saveCar.mjs";
-import { carValid } from "../../logic/carValid.mjs";
 import { FetchHeader } from "../../interfaces/fetchHeader.mjs";
 import { makeRequest } from "../../logic/fetchAPI.mjs";
 import { springDomain } from "../../main.mjs";
+import { redirect } from "./redirect.mjs";
 
 
 /**
- * Expects object with car properties
+ * Expects object with car properties, gets the old version of the car and
+ * updates it with the new properties. Then makes post request to spring in order
+ * to save the new car.
+ * 
  * @param req 
  * @param res 
  * @param next 
- * @returns response of savCar() request or false if one check failed.
+ * @returns response of redirect() request or false if one check failed.
  */
 async function update(req, res, next) {
 
     const id: number = req.query.id;
     const newCarAttributes = req.body;
     
-    // case: id not a number or no new attributes found
-    if (!isUpdateInputValid(id, newCarAttributes)) {
-        res.send("Failed to update car. Something wrong with request body or queries.");
+    // case: id not a number
+    if (isNaN(id)) {
+        res.send("Failed to update car. Car id is not a number.");
         return false;
     }
     
@@ -45,26 +46,13 @@ async function update(req, res, next) {
 
     // make request to spring
     req.body = updatedCar;
+    req.method = "post";
     req.originalUrl = "/car/saveCar";
-    return saveCar(req, res, next);
+    return redirect(req, res, next);
 }
 
 
 ///// hlper methods:
-
-
-function isUpdateInputValid(id, newCarAttributes): boolean {
-
-    // case: id from query is not a number
-    if (isNaN(id)) 
-        return false;
-    
-    // case: request body empty
-    if (isObjectEmpty(newCarAttributes)) 
-        return false;
-
-    return true;
-}
 
 
 async function getOldCar(id: number) {
@@ -113,7 +101,7 @@ function updateCar(oldCar, newCarAttributes): Car | boolean {
     Object.entries(newCarAttributes).forEach(([key, value]) => {
         if (value !== null && value !== undefined) {
 
-            // case: value is another object
+            // if value is another object, make recursion
             if (typeof value === "object") {
                 const updatedObj = updateCar(oldCar[key], value);
                 if (!updatedObj) {
@@ -124,12 +112,6 @@ function updateCar(oldCar, newCarAttributes): Car | boolean {
                 value = updatedObj;
             }
             
-            // case: attribute invalid
-            if (!objectValid(value)) {
-                valid = false;
-                return;
-            }
-
             // case: wrong attribute type
             if (typeof value !== typeof oldCar[key]) {
                 valid = false;

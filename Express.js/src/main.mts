@@ -1,5 +1,4 @@
 import express from "express";
-import { objectValid } from "./logic/objectValid.mjs";
 import { carRouter } from "./routers/car/router.mjs";
 
 // using localhost as default or any other if specified (e.g. in docker)
@@ -13,23 +12,11 @@ const port = 4001;
 app.use(express.json());
 
 
-// assuming that every post request has a request body
-app.post("/**", (req, res, next) => {
-
-    if (!objectValid(req.body)) {
-        res.send("Invalid request body.");
-        return;
-    }
-    
-    next();
-});
-
-
 app.use("/car", carRouter);
 
 
 // handling unknown URLs
-app.use("*", (req, res, next) => {
+app.use("*", (req, res) => {
 
     res.send(`Something wrong with this url.`);
 });
