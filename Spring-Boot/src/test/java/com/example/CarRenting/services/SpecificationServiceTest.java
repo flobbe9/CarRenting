@@ -136,7 +136,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void kmhToMph_shouldBeTrue() {
+    void calculate_kmhToMph() {
 
         // converting 100 km/h to mph
         assertEquals(62.13711922, specificationService.kmhToMph(100));
@@ -144,7 +144,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void mphToKmh_shouldBeTrue() {
+    void calculate_mphToKmh() {
 
         // converting 100 mph to km/h
         assertEquals(160.9344, specificationService.mphToKmh(100));
@@ -152,7 +152,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void kgToPounds_shouldBeTrue() {
+    void calculate_kgToPounds() {
 
         // converting 100 kg to pounds
         assertEquals(220.46226218500001, specificationService.kgToPounds(100));
@@ -160,7 +160,7 @@ public class SpecificationServiceTest {
 
 
     @Test
-    void pountdsToKg_shouldBeTrue() {
+    void calculate_pountdsToKg() {
 
         // converting 100 kg to pounds
         assertEquals(45.359237, specificationService.poundsToKg(100));
