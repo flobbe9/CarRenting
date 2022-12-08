@@ -14,4 +14,4 @@ To use CarRenting with Docker, pull the following images from dockerhub: <br />
 After that, copy the docker-compose.yml at the project root and `docker-compose up` will do the rest for you.
 
 ### Try requests with Postman
-https://www.postman.com/flobbe10/workspace/flobbe10-carrenting/collection/23751197-cb6b7126-01ae-45d5-b80f-ced5a47b45c5?action=share&creator=23751197
+https://www.postman.com/grey-shuttle-863417/workspace/carrenting/collection/23751197-cb6b7126-01ae-45d5-b80f-ced5a47b45c5?action=share&creator=23751197
